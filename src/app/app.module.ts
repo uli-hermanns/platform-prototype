@@ -5,7 +5,7 @@ import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { MainModule } from "./features/main/main.module";
-import { SharedModule } from "./shared/shared/shared.module";
+import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core/core/core.module";
 
 @NgModule({

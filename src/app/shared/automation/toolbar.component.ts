@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'toolbar',
+  selector: 'flex-toolbar',
   templateUrl: './toolbar.component.html',
   styles: [`h1 { font-family: Lato; }`]
 })
