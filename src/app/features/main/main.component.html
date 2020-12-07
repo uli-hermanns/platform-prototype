@@ -1,14 +1,13 @@
 <app-titlebar></app-titlebar>
-<mat-grid-list cols="1" rowHeight="400px">
-	<mat-grid-tile>
-		<mat-grid-tile-header>Main</mat-grid-tile-header>
-    <div>
+<mat-drawer-container class="example-container" autosize>
+	<mat-drawer #drawer class="example-sidenav" mode="side" opened="true" position="end">
+		<p>Auto-resizing sidenav</p>
+	</mat-drawer>
+
+	<div class="example-sidenav-content">
 		<flex-toolbar name="Default Toolbar">
 			<button command="button">Click me!</button>
 		</flex-toolbar>
-    </div>
-	</mat-grid-tile>
-	<mat-grid-tile>
-		<mat-grid-tile-header>Details</mat-grid-tile-header>
-	</mat-grid-tile>
-</mat-grid-list>
+	</div>
+
+</mat-drawer-container>
