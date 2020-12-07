@@ -1,0 +1,4 @@
+.mat-grid-tile ::ng-deep div {
+  justify-content: flex-start !important ;
+  align-items: flex-start !important;
+}
