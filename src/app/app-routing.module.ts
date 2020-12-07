@@ -14,20 +14,13 @@ const routes: Routes = [
   {
     path: "",
     component: MainComponent,
-    resolve: { dto: DtoResolver.name }
+    resolve: { dto: DtoResolver.new(Dto) }
   }
 ];
 
 // configures NgModule imports and exports
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [
-    {
-      provide: DtoResolver.name,
-      useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
-        new DtoResolver<Dto>()
-    }
-  ]
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
