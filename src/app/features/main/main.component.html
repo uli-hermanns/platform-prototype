@@ -1,13 +1,14 @@
 <app-titlebar></app-titlebar>
 <mat-drawer-container class="example-container" autosize>
-	<mat-drawer #drawer class="example-sidenav" mode="side" opened="true" position="end">
+
+	<mat-drawer #drawer class="example-sidenav" mode="side" opened position="end">
 		<p>Auto-resizing sidenav</p>
 	</mat-drawer>
 
-	<div class="example-sidenav-content">
+	<mat-drawer-content>
 		<flex-toolbar name="Default Toolbar">
 			<button command="button">Click me!</button>
 		</flex-toolbar>
-	</div>
+	</mat-drawer-content>>
 
 </mat-drawer-container>
