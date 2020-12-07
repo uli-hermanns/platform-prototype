@@ -4,8 +4,8 @@
   flex-direction: column;
 }
 
-.context {
-  padding: 20px;
+.content {
+  padding: 10px;
 }
 
 .container {
@@ -13,5 +13,5 @@
 }
 
 .details {
-  padding: 20px;
+  padding: 10px;
 }
