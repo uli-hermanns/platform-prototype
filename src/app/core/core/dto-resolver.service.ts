@@ -17,7 +17,7 @@ export class DtoResolver<TDto extends Dto> implements Resolve<TDto> {
     state: RouterStateSnapshot
   ) => Resolve<TDto> {
     return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>
-      new DtoResolver<TDto>().resolve;
+      new DtoResolver<TDto>().resolve(route, state);
   }
   public resolve(
     route: ActivatedRouteSnapshot,
