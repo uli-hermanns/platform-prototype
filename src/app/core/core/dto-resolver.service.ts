@@ -10,7 +10,7 @@ import { Dto, DtoConstructor } from "./dto.model";
 type Constructor<T> = new (...args: any[]) => T;
 
 @Injectable()
-export class DtoResolver<TDto extends Dto> implements Resolve<TDto> {
+export class DtoResolver implements Resolve<Dto> {
   constructor() {}
   public resolve(
     route: ActivatedRouteSnapshot,
