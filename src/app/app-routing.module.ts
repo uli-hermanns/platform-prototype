@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router"; // CLI imports router
-import { DtoResolver } from "./core/core/dto-resolver.service";
+import { DtoResolver } from "./core/data/dto-resolver.service";
 import { MainDto } from "./features/main/main-dto.model";
 import { MainComponent } from "./features/main/main.component";
 

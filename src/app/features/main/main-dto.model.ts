@@ -1,3 +1,3 @@
-import { Dto } from "../../core/core/dto.model";
+import { Dto } from "../../core/data/dto.model";
 
 export class MainDto extends Dto<string> {}

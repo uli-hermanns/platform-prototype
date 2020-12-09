@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AppModule } from "../../app.module";
-import { DtoResolver } from "./dto-resolver.service";
+import { DtoResolver } from "./data/dto-resolver.service";
 
 @NgModule({
   imports: [CommonModule],
