@@ -1,12 +1,10 @@
 <app-titlebar></app-titlebar>
-<mat-drawer-container autosize pipeline=root>
+<mat-drawer-container autosize pipeline="root">
+  <mat-drawer mode="side" opened position="start">
+    <p>Application Main Feature</p>
+  </mat-drawer>
 
-	<mat-drawer mode="side" opened position="start">
-		<p>Application Feature 1</p>
-	</mat-drawer>
-
-	<mat-drawer-content>
-		<router-outlet></router-outlet>
-	</mat-drawer-content>>
-
+  <mat-drawer-content>
+    <router-outlet></router-outlet> </mat-drawer-content
+  >>
 </mat-drawer-container>
