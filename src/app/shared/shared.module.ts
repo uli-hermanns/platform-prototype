@@ -1,7 +1,7 @@
 import { NgModule, Optional, SkipSelf } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ToolbarComponent } from "./automation/toolbar.component";
-import { AppModule } from "../app.module";
+import { ApplicationModule } from "../application.module";
 import { PipelineDirective } from "./automation/pipeline.directive";
 import { CommandDirective } from "./automation/command.directive";
 import { AppComponent } from "./layout/app.component";
@@ -25,7 +25,7 @@ export class SharedModule {
     if (parentModule) {
       throw new Error(
         `${SharedModule.name} is already loaded. Import it once in the ${
-          AppModule.name
+          ApplicationModule.name
         } only.`
       );
     }
