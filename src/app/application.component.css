@@ -1,9 +1,18 @@
-.app {
+:host {
   height: 100%;
   display: flex;
-  align-items: stretch;
+  flex: 1;
+  flex-direction: column;
 }
 
-p {
-  font-family: Lato;
+mat-drawer-content {
+  padding: 10px;
+}
+
+mat-drawer-container {
+  flex: 1;
+}
+
+mat-drawer {
+  padding: 10px;
 }

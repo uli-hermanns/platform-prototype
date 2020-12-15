@@ -6,9 +6,10 @@ import { PipelineDirective } from "./automation/pipeline.directive";
 import { CommandDirective } from "./automation/command.directive";
 import { AppComponent } from "./layout/app.component";
 import { TitlebarComponent } from "./titlebar/titlebar.component";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatToolbarModule],
   declarations: [
     TitlebarComponent,
     ToolbarComponent,
