@@ -5,16 +5,24 @@ import { ApplicationModule } from "../application.module";
 import { PipelineDirective } from "./automation/pipeline.directive";
 import { CommandDirective } from "./automation/command.directive";
 import { AppComponent } from "./layout/app.component";
+import { TitlebarComponent } from "./titlebar/titlebar.component";
 
 @NgModule({
   imports: [CommonModule],
   declarations: [
+    TitlebarComponent,
     ToolbarComponent,
     PipelineDirective,
     CommandDirective,
     AppComponent
   ],
-  exports: [ToolbarComponent, AppComponent, PipelineDirective, CommandDirective]
+  exports: [
+    TitlebarComponent,
+    ToolbarComponent,
+    AppComponent,
+    PipelineDirective,
+    CommandDirective
+  ]
 })
 export class SharedModule {
   constructor(

@@ -4,14 +4,14 @@
   flex-direction: column;
 }
 
-.content {
+mat-drawer-content {
   padding: 10px;
 }
 
-.container {
+mat-drawer-container {
   flex: 1;
 }
 
-.details {
+mat-drawer {
   padding: 10px;
 }
