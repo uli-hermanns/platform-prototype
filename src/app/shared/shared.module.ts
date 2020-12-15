@@ -4,7 +4,7 @@ import { ToolbarComponent } from "./automation/toolbar.component";
 import { ApplicationModule } from "../application.module";
 import { PipelineDirective } from "./automation/pipeline.directive";
 import { CommandDirective } from "./automation/command.directive";
-import { AppComponent } from "./layout/app.component";
+import { AppComponent } from "./layout/app/app.component";
 import { TitlebarComponent } from "./titlebar/titlebar.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 
