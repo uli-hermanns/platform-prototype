@@ -3,7 +3,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 
-import { AppComponent } from "./app.component";
+import { ApplicationComponent } from "./application.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { MainModule } from "./features/main/main.module";
 import { SharedModule } from "./shared/shared.module";
@@ -19,7 +19,7 @@ import { CoreModule } from "./core/core.module";
     MainModule,
     AppRoutingModule
   ],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent]
+  declarations: [ApplicationComponent],
+  bootstrap: [ApplicationComponent]
 })
 export class AppModule {}
