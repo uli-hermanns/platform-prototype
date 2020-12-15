@@ -7,7 +7,7 @@ import { CommandDirective } from "./automation/command.directive";
 import { AppComponent } from "./layout/app/app.component";
 import { TitlebarComponent } from "./titlebar/titlebar.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { AppHeaderComponent } from './layout/app/app-header/app-header.component';
+import { AppHeaderComponent } from "./layout/app/app-header/app-header.component";
 
 @NgModule({
   imports: [CommonModule, MatToolbarModule],
@@ -23,6 +23,7 @@ import { AppHeaderComponent } from './layout/app/app-header/app-header.component
     TitlebarComponent,
     ToolbarComponent,
     AppComponent,
+    AppHeaderComponent,
     PipelineDirective,
     CommandDirective
   ]
