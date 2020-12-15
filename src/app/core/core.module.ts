@@ -1,6 +1,6 @@
 import { NgModule, Optional, SkipSelf } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { AppModule } from "../app.module";
+import { ApplicationModule } from "../application.module";
 import { DtoResolver } from "./data/dto-resolver.service";
 
 @NgModule({
@@ -17,7 +17,7 @@ export class CoreModule {
     if (parentModule) {
       throw new Error(
         `${CoreModule.name} is already loaded. Import it once in the ${
-          AppModule.name
+          ApplicationModule.name
         } only.`
       );
     }
