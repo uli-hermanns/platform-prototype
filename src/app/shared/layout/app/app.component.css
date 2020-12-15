@@ -1,3 +1,8 @@
+:host {
+  display: flex;
+  flex-direction: row;
+}
+
 flex-app-footer {
   align-self: flex-end;
 }
