@@ -11,6 +11,7 @@ import { AppHeaderComponent } from "./layout/app/app-header/app-header.component
 import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component";
 import { AppDetailsComponent } from "./layout/app/app-details/app-details.component";
 import { MatSidenavModule } from "@angular/material/sidenav";
+import { DetailTabsComponent } from './detail-tabs/detail-tabs.component';
 
 @NgModule({
   imports: [CommonModule, MatToolbarModule, MatSidenavModule],
@@ -22,7 +23,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     AppComponent,
     AppHeaderComponent,
     AppFooterComponent,
-    AppDetailsComponent
+    AppDetailsComponent,
+    DetailTabsComponent
   ],
   exports: [
     TitlebarComponent,
@@ -32,7 +34,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
     AppFooterComponent,
     AppDetailsComponent,
     PipelineDirective,
-    CommandDirective
+    CommandDirective,
+    DetailTabsComponent
   ]
 })
 export class SharedModule {

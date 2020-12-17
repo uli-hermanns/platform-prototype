@@ -7,13 +7,14 @@
 
   <flex-app-details>
     <mat-tab-group
+      flex-detail-tabs
       mat-align-tabs="start"
       [disablePagination]="true"
       animationDuration="0ms"
     >
-      <mat-tab label="TAB 1">Content 1</mat-tab>
-      <mat-tab label="TAB 2">Content 2</mat-tab>
-      <mat-tab label="TAB 3">Content 3</mat-tab>
+      <mat-tab label="TAB 1"><p>Content 1</p></mat-tab>
+      <mat-tab label="TAB 2"><p>Content 2</p></mat-tab>
+      <mat-tab label="TAB 3"><p>Content 3</p></mat-tab>
       <mat-tab disabled>
         <ng-template mat-tab-label>
           <button mat-icon-button [matMenuTriggerFor]="menu">
