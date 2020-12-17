@@ -4,8 +4,11 @@
   height: 100%;
 }
 
-main {
+.content {
   flex: auto;
+}
+
+main {
   padding: 10px;
 }
 
