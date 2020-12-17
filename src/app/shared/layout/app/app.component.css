@@ -1,8 +1,13 @@
 :host {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 flex-app-footer {
   align-self: flex-end;
+}
+
+#content {
+  flex: auto;
 }
