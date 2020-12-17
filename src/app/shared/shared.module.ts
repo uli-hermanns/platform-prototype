@@ -9,10 +9,11 @@ import { TitlebarComponent } from "./titlebar/titlebar.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { AppHeaderComponent } from "./layout/app/app-header/app-header.component";
 import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component";
-import { AppDetailsComponent } from './layout/app/app-details/app-details.component';
+import { AppDetailsComponent } from "./layout/app/app-details/app-details.component";
+import { MatSidenavModule } from "@angular/material/sidenav";
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule],
+  imports: [CommonModule, MatToolbarModule, MatSidenavModule],
   declarations: [
     TitlebarComponent,
     ToolbarComponent,
@@ -29,6 +30,7 @@ import { AppDetailsComponent } from './layout/app/app-details/app-details.compon
     AppComponent,
     AppHeaderComponent,
     AppFooterComponent,
+    AppDetailsComponent,
     PipelineDirective,
     CommandDirective
   ]
