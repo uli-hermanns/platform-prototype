@@ -9,6 +9,7 @@ import { TitlebarComponent } from "./titlebar/titlebar.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { AppHeaderComponent } from "./layout/app/app-header/app-header.component";
 import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component";
+import { AppDetailsComponent } from './layout/app/app-details/app-details.component';
 
 @NgModule({
   imports: [CommonModule, MatToolbarModule],
@@ -19,7 +20,8 @@ import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component
     CommandDirective,
     AppComponent,
     AppHeaderComponent,
-    AppFooterComponent
+    AppFooterComponent,
+    AppDetailsComponent
   ],
   exports: [
     TitlebarComponent,
