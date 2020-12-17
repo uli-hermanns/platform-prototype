@@ -8,6 +8,6 @@ flex-app-footer {
   align-self: flex-end;
 }
 
-#content {
+.content {
   flex: auto;
 }
