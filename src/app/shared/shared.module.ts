@@ -12,9 +12,10 @@ import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component
 import { AppDetailsComponent } from "./layout/app/app-details/app-details.component";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { DetailTabsComponent } from './detail-tabs/detail-tabs.component';
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatSidenavModule],
+  imports: [CommonModule, MatToolbarModule, MatSidenavModule, MatTabsModule],
   declarations: [
     TitlebarComponent,
     ToolbarComponent,
