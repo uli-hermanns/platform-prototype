@@ -5,13 +5,11 @@
   flex-direction: column;
 }
 
-mat-drawer-content {
-}
-
 mat-drawer-container {
   flex: 1;
 }
 
 mat-drawer {
   padding: 10px;
+  background-color: lightgray;
 }

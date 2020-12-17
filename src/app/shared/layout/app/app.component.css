@@ -4,15 +4,26 @@
   height: 100%;
 }
 
-.content {
+.container {
   flex: auto;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.details {
+  padding: 10px;
+  background-color: lightgreen;
+}
+
 main {
+  flex: auto;
   padding: 10px;
 }
 
 footer {
-  background-color: lightgrey;
+  background-color: lightsteelblue;
   padding: 10px;
 }

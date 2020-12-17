@@ -1,16 +1,16 @@
 <header>
   <ng-content select="flex-app-header"></ng-content>
 </header>
-<mat-drawer-container class="content" style="height:100%">
-  <mat-drawer mode="side" opened position="end">
+<mat-drawer-container class="container">
+  <mat-drawer class="details" mode="side" opened position="end">
     <ng-content select="flex-app-details"></ng-content>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content class="content">
     <main>
       <ng-content></ng-content>
     </main>
+    <footer>
+      <ng-content select="flex-app-footer"></ng-content>
+    </footer>
   </mat-drawer-content>
 </mat-drawer-container>
-<footer>
-  <ng-content select="flex-app-footer"></ng-content>
-</footer>
