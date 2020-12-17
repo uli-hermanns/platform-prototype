@@ -4,10 +4,12 @@
   height: 100%;
 }
 
-flex-app-footer {
-  align-self: flex-end;
+main {
+  flex: auto;
+  padding: 10px;
 }
 
-.content {
-  flex: auto;
+footer {
+  background-color: lightgrey;
+  padding: 10px;
 }
