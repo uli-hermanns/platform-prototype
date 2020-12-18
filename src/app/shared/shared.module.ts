@@ -13,9 +13,13 @@ import { AppDetailsComponent } from "./layout/app/app-details/app-details.compon
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { DetailTabsComponent } from './detail-tabs/detail-tabs.component';
 import { MatTabsModule } from "@angular/material/tabs";
+import { DetailTabComponent } from './detail-tabs/detail-tab/detail-tab.component';
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatSidenavModule, MatTabsModule],
+  imports: [CommonModule, MatToolbarModule, MatSidenavModule, MatTabsModule, MatMenuModule, MatIconModule, MatButtonModule],
   declarations: [
     TitlebarComponent,
     ToolbarComponent,
@@ -25,7 +29,8 @@ import { MatTabsModule } from "@angular/material/tabs";
     AppHeaderComponent,
     AppFooterComponent,
     AppDetailsComponent,
-    DetailTabsComponent
+    DetailTabsComponent,
+    DetailTabComponent
   ],
   exports: [
     TitlebarComponent,
@@ -36,7 +41,8 @@ import { MatTabsModule } from "@angular/material/tabs";
     AppDetailsComponent,
     PipelineDirective,
     CommandDirective,
-    DetailTabsComponent
+    DetailTabsComponent,
+    DetailTabComponent
   ]
 })
 export class SharedModule {

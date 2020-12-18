@@ -1,3 +1,17 @@
-<mat-tab label="TAB n"><p>Content Add</p></mat-tab>
-<ng-content>
-</ng-content>
+<mat-tab-group mat-align-tabs="start" [disablePagination]="true" animationDuration="0ms">
+	<mat-tab *ngFor="let tab of visibleTabs" [label]="tab.label">
+		<ng-container *ngTemplateOutlet="tab.template"></ng-container>
+	</mat-tab>
+	<mat-tab disabled>
+		<ng-template mat-tab-label>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+			<mat-menu #menu>
+				<button mat-menu-item *ngFor="let tab of hiddenTabs">
+          {{ tab.label }}
+        </button>
+			</mat-menu>
+		</ng-template>
+	</mat-tab>
+</mat-tab-group>
