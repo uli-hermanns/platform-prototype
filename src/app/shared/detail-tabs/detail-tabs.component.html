@@ -8,7 +8,7 @@
             <mat-icon>more_horiz</mat-icon>
           </button>
 			<mat-menu #menu>
-				<button mat-menu-item *ngFor="let tab of hiddenTabs">
+				<button mat-menu-item *ngFor="let tab of hiddenTabs" (click)="show(tab)">
           {{ tab.label }}
         </button>
 			</mat-menu>
