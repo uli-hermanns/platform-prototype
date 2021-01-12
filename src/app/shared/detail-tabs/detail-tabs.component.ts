@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   ContentChildren,
-  OnInit,
   QueryList,
   ViewChild
 } from "@angular/core";
@@ -33,10 +32,12 @@ export class DetailTabsComponent implements AfterViewInit {
     return this.tabs.filter(tab => !tab.visible);
   }
 
-  public show(tab: DetailTabComponent) {
+  public showAsLast(tab: DetailTabComponent) {
     const tabs = this.visibleTabs;
-    tabs[tabs.length - 1].visible = false;
+    if (tabs.length > 0) {
+      tabs[tabs.length - 1].visible = false;
+    }
     tab.visible = true;
-    this.tabGroup.selectedIndex = tabs.length - 1;
+    this.tabGroup.selectedIndex = this.visibleTabs.length - 1;
   }
 }

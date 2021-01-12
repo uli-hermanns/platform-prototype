@@ -2,13 +2,13 @@
 	<mat-tab *ngFor="let tab of visibleTabs" [label]="tab.label">
 		<ng-container *ngTemplateOutlet="tab.template"></ng-container>
 	</mat-tab>
-	<mat-tab disabled>
+	<mat-tab disabled *ngIf="hiddenTabs.length > 0">
 		<ng-template mat-tab-label>
 			<button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_horiz</mat-icon>
           </button>
 			<mat-menu #menu>
-				<button mat-menu-item *ngFor="let tab of hiddenTabs" (click)="show(tab)">
+				<button mat-menu-item *ngFor="let tab of hiddenTabs" (click)="showAsLast(tab)">
           {{ tab.label }}
         </button>
 			</mat-menu>
