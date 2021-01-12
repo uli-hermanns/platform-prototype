@@ -21,7 +21,6 @@ export class DetailTabsComponent implements AfterViewInit {
   private tabs: QueryList<DetailTabComponent>;
 
   public visibleTabs: DetailTabComponent[] = [];
-  // public hiddenTabs: DetailTabComponent[] = [];
 
   constructor() {}
 
@@ -29,7 +28,7 @@ export class DetailTabsComponent implements AfterViewInit {
     this.visibleTabs = this.tabs.filter(tab => tab.visible);
   }
 
-  public hiddenTabs(): DetailTabComponent[] {
+  public get hiddenTabs(): DetailTabComponent[] {
     return this.tabs
       .filter(tab => !tab.visible)
       .sort((left, right) => (left.label < right.label ? -1 : 1));
