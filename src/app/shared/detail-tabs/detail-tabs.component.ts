@@ -20,24 +20,33 @@ export class DetailTabsComponent implements AfterViewInit {
   @ContentChildren(DetailTabComponent)
   private tabs: QueryList<DetailTabComponent>;
 
+  public visibleTabs: DetailTabComponent[] = [];
+  // public hiddenTabs: DetailTabComponent[] = [];
+
   constructor() {}
 
-  public ngAfterViewInit() {}
-
-  public get visibleTabs(): DetailTabComponent[] {
-    return this.tabs.filter(tab => tab.visible);
+  public ngAfterViewInit() {
+    this.visibleTabs = this.tabs.filter(tab => tab.visible);
   }
 
-  public get hiddenTabs(): DetailTabComponent[] {
-    return this.tabs.filter(tab => !tab.visible);
+  public hiddenTabs(): DetailTabComponent[] {
+    return this.tabs
+      .filter(tab => !tab.visible)
+      .sort((left, right) => (left.label < right.label ? -1 : 1));
   }
 
-  public showAsLast(tab: DetailTabComponent) {
-    const tabs = this.visibleTabs;
-    if (tabs.length > 0) {
-      tabs[tabs.length - 1].visible = false;
+  public showAsLast(tab: DetailTabComponent): void {
+    if (tab.visible) {
+      return;
     }
+
+    if (this.visibleTabs.length > 0) {
+      const lastTab = this.visibleTabs.pop();
+      lastTab.visible = false;
+    }
+
     tab.visible = true;
+    this.visibleTabs.push(tab);
     this.tabGroup.selectedIndex = this.visibleTabs.length - 1;
   }
 }
