@@ -43,21 +43,6 @@ export class Validator {
   }
 
   /**
-   * Checks whether the input string is a valid date object.
-   * @param value Contains the input value tested against a regex to be valid date.
-   * @returns True if the input is a date object; otherwise false.
-   */
-  public static isDate(value: string): boolean {
-    // eslint-disable-next-line max-len
-    const datePattern = /^(?:(?:31(\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/gm;
-    const date: Date = new Date(value);
-    const dd: string = String(date.getDate()).padStart(2, "0");
-    const mm: string = String(date.getMonth() + 1).padStart(2, "0");
-    const yyyy: number = date.getFullYear();
-    return datePattern.test(`${dd}.${mm}.${yyyy}`);
-  }
-
-  /**
    * Gets a flag indicating whether the specified value is defined.
    *
    * @param value The value to check.
@@ -88,28 +73,6 @@ export class Validator {
    */
   public static isFunction(value: any): value is Function {
     return typeof value === "function";
-  }
-
-  /**
-   * Checks whether the input string value is a valid iban.
-   * @param value Contains the string value which is supposed to be a valid iban.
-   * @returns True, if the value is an iban; otherwise false.
-   */
-  public static isIban(value: string): boolean {
-    const de = /DE[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){4}([0-9]{2})\s?/;
-    const nl = /NL[a-zA-Z0-9]{2}\s?([a-zA-Z]{4}\s?){1}([0-9]{4}\s?){2}([0-9]{2})\s?/;
-    const be = /BE[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){3}\s?/;
-    const at = /AT[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){4}\s?/;
-    const ch = /CH[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){1}([0-9]{1})([a-zA-Z0-9]{3}\s?)([a-zA-Z0-9]{4}\s?){2}([a-zA-Z0-9]{1})\s?/;
-    const it = /IT[a-zA-Z0-9]{2}\s?([a-zA-Z]{1})([0-9]{3}\s?)([0-9]{4}\s?){1}([0-9]{3})([a-zA-Z0-9]{1}\s?)([a-zA-Z0-9]{4}\s?){2}([a-zA-Z0-9]{3})\s?/;
-    return (
-      de.test(value) ||
-      nl.test(value) ||
-      be.test(value) ||
-      at.test(value) ||
-      ch.test(value) ||
-      it.test(value)
-    );
   }
 
   /**
