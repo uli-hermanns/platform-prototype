@@ -5,7 +5,6 @@ import {
   TemplateRef,
   ViewChild
 } from "@angular/core";
-import { MatTab } from "@angular/material/tabs";
 import { Converter } from "../../../core/data/converter";
 
 export type InputTemplate<T, TString = string> = T | TString | null | undefined;
@@ -20,8 +19,11 @@ export type InputBoolean<
   styleUrls: ["./detail-tab.component.css"]
 })
 export class DetailTabComponent implements OnInit {
-  @Input() public label: string;
   private _hidden: boolean = false;
+
+  @Input() public label: string;
+
+  @ViewChild(TemplateRef) public template: TemplateRef<any>;
 
   @Input()
   public get hidden(): boolean {
@@ -31,8 +33,6 @@ export class DetailTabComponent implements OnInit {
   public set hidden(value: boolean) {
     this._hidden = Converter.boolean(value);
   }
-
-  @ViewChild(TemplateRef) public template: TemplateRef<any>;
 
   constructor() {}
 

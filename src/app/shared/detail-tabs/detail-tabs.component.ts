@@ -1,11 +1,13 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
+  ChangeDetectorRef,
   Component,
   ContentChildren,
   QueryList,
   ViewChild
 } from "@angular/core";
 import { MatTab, MatTabGroup } from "@angular/material/tabs";
+import { Validator } from "../../core/data/validator";
 import { DetailTabComponent } from "./detail-tab/detail-tab.component";
 
 @Component({
@@ -13,7 +15,7 @@ import { DetailTabComponent } from "./detail-tab/detail-tab.component";
   templateUrl: "./detail-tabs.component.html",
   styleUrls: ["./detail-tabs.component.css"]
 })
-export class DetailTabsComponent implements AfterViewInit {
+export class DetailTabsComponent implements AfterContentInit {
   @ViewChild(MatTabGroup)
   public tabGroup: MatTabGroup;
 
@@ -24,8 +26,8 @@ export class DetailTabsComponent implements AfterViewInit {
 
   constructor() {}
 
-  public ngAfterViewInit() {
-    this.visibleTabs = this.tabs.filter(tab => !tab.hidden);
+  public ngAfterContentInit() {
+    setTimeout(() => (this.visibleTabs = this.tabs.filter(tab => !tab.hidden)));
   }
 
   public get hiddenTabs(): DetailTabComponent[] {
