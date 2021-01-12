@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="start" [disablePagination]="true" animationDuration="0ms">
+<mat-tab-group mat-align-tabs="start" [disablePagination]="true" animationDuration="0ms" style="width: 400px">
 	<mat-tab *ngFor="let tab of visibleTabs" [label]="tab.label">
 		<ng-container *ngTemplateOutlet="tab.template"></ng-container>
 	</mat-tab>
@@ -7,7 +7,7 @@
 			<button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_horiz</mat-icon>
           </button>
-			<mat-menu #menu>
+			<mat-menu #menu xPosition="before">
 				<button mat-menu-item *ngFor="let tab of hiddenTabs" (click)="showAsLast(tab)">
           {{ tab.label }}
         </button>
