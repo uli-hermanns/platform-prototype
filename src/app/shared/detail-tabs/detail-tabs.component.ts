@@ -1,13 +1,11 @@
 import {
   AfterContentInit,
-  ChangeDetectorRef,
   Component,
   ContentChildren,
   QueryList,
   ViewChild
 } from "@angular/core";
-import { MatTab, MatTabGroup } from "@angular/material/tabs";
-import { Validator } from "../../core/data/validator";
+import { MatTabGroup } from "@angular/material/tabs";
 import { DetailTabComponent } from "./detail-tab/detail-tab.component";
 
 @Component({
