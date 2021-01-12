@@ -1,4 +1,4 @@
-<mat-tab-group mat-align-tabs="start" [disablePagination]="true" animationDuration="0ms" style="width: 400px">
+<mat-tab-group mat-align-tabs="start" [disablePagination]="true" animationDuration="0ms">
 	<mat-tab *ngFor="let tab of visibleTabs" [label]="tab.label">
 		<ng-container *ngTemplateOutlet="tab.template"></ng-container>
 	</mat-tab>
