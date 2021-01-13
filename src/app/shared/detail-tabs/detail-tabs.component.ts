@@ -1,11 +1,13 @@
 import {
-  AfterContentInit,
+  AfterViewInit,
   Component,
   ContentChildren,
   QueryList,
-  ViewChild
+  ViewChild, 
+  ChangeDetectorRef
 } from "@angular/core";
 import { MatTabGroup } from "@angular/material/tabs";
+import { Validator } from "../../core/data/validator";
 import { DetailTabComponent } from "./detail-tab/detail-tab.component";
 
 @Component({
@@ -13,19 +15,21 @@ import { DetailTabComponent } from "./detail-tab/detail-tab.component";
   templateUrl: "./detail-tabs.component.html",
   styleUrls: ["./detail-tabs.component.css"]
 })
-export class DetailTabsComponent implements AfterContentInit {
+export class DetailTabsComponent implements AfterViewInit {
   @ViewChild(MatTabGroup)
   public tabGroup: MatTabGroup;
 
   @ContentChildren(DetailTabComponent)
-  private tabs: QueryList<DetailTabComponent>;
+  private tabs: QueryList<DetailTabComponent> = new QueryList<DetailTabComponent>();
 
   public visibleTabs: DetailTabComponent[] = [];
 
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef) {}
 
-  public ngAfterContentInit() {
-    setTimeout(() => (this.visibleTabs = this.tabs.filter(tab => !tab.hidden)));
+  public ngAfterViewInit() {
+      this.visibleTabs = this.tabs.filter(tab => !tab.hidden);
+      this.cd.detectChanges();
+      this.tabGroup.selectedIndex = 0;
   }
 
   public get hiddenTabs(): DetailTabComponent[] {
