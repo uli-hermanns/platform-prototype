@@ -43,8 +43,7 @@ export class DetailTabsComponent implements AfterViewInit {
     }
 
     if (this.visibleTabs.length > 0) {
-      const lastTab = this.visibleTabs.pop();
-      lastTab.hidden = true;
+      this.visibleTabs.pop().hidden = true;
     }
 
     tab.hidden = false;
