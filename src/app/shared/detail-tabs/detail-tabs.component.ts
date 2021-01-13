@@ -29,7 +29,6 @@ export class DetailTabsComponent implements AfterViewInit {
   public ngAfterViewInit() {
       this.visibleTabs = this.tabs.filter(tab => !tab.hidden);
       this.cd.detectChanges();
-      this.tabGroup.selectedIndex = 0;
   }
 
   public get hiddenTabs(): DetailTabComponent[] {
