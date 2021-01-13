@@ -7,7 +7,6 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 import { MatTabGroup } from "@angular/material/tabs";
-import { Validator } from "../../core/data/validator";
 import { DetailTabComponent } from "./detail-tab/detail-tab.component";
 
 @Component({
