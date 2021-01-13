@@ -19,7 +19,7 @@ export class DetailTabsComponent implements AfterViewInit {
   public tabGroup: MatTabGroup;
 
   @ContentChildren(DetailTabComponent)
-  private tabs: QueryList<DetailTabComponent> = new QueryList<DetailTabComponent>();
+  private tabs: QueryList<DetailTabComponent>;
 
   public visibleTabs: DetailTabComponent[] = [];
 
