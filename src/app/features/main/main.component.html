@@ -1,14 +1,14 @@
 <flex-app>
   <flex-app-header>
-    <h1>Main Feature</h1>
+    <h1>{{customer.firstName}}</h1>
   </flex-app-header>
 
   Main Content
 
   <flex-app-details>
     <flex-detail-tabs>
-      <flex-detail-tab label="TAB 1">
-        <app-form> </app-form>
+      <flex-detail-tab [label]="customer.firstName">
+        <app-form [customer]="customer"> </app-form>
       </flex-detail-tab>
       <flex-detail-tab label="TAB 2" hidden>
         <p>Content 2</p>

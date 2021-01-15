@@ -1,5 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { Component, Input, OnInit, Output } from "@angular/core";
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder
+} from "@angular/forms";
+import { switchMap } from "rxjs/operators";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 
 @Component({
@@ -8,15 +14,30 @@ import { CustomerDto } from "../../../core/data/customer-dto.model";
   styleUrls: ["./form.component.css"]
 })
 export class FormComponent implements OnInit {
+  @Input()
   public customer: CustomerDto = null;
 
-  public customerForm = new FormGroup({
-    firstName: new FormControl(""),
-    lastName: new FormControl("")
-  });
-  constructor() {
-    this.customerForm.patchValue({ firstName: "Max" });
-  }
+  public customerForm: FormGroup;
 
-  ngOnInit() {}
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.customerForm = this.fb.group(
+      {
+        firstName: new FormControl("firtName", Validators.required),
+        lastName: new FormControl("lastName")
+      },
+      {
+        updateOn: "blur"
+      }
+    );
+    this.customerForm.patchValue(this.customer);
+    this.customerForm.get("firstName").valueChanges.pipe(
+      switchMap((value, index) => {
+        console.info(value);
+        this.customer.firstName = value;
+        return value;
+      })
+    );
+  }
 }

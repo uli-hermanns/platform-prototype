@@ -3,5 +3,5 @@ export interface DtoConstructor<TDto extends Dto> {
 }
 
 export class Dto<TKey = unknown> {
-  public Key: TKey;
+  public key: TKey;
 }
