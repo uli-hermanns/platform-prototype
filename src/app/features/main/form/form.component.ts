@@ -32,12 +32,10 @@ export class FormComponent implements OnInit {
       }
     );
     this.customerForm.patchValue(this.customer);
-    this.customerForm.get("firstName").valueChanges.pipe(
-      switchMap((value, index) => {
-        console.info(value);
-        this.customer.firstName = value;
-        return value;
-      })
-    );
+    this.customerForm.valueChanges.subscribe(value => {
+      console.info(value);
+      this.customer.firstName = value["firstName"];
+      return value;
+    });
   }
 }
