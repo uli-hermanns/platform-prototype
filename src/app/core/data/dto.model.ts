@@ -1,5 +1,3 @@
-import { Converter } from "./converter";
-
 export interface DtoConstructor<TDto extends Dto> {
   new (): TDto;
 }
