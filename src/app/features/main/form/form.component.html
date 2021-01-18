@@ -1,10 +1,16 @@
-
 <form [formGroup]="customerForm">
   <p>
     <mat-form-field appearance="standard">
       <mat-label>First Name</mat-label>
-      <input matInput formControlName="firstName" />
+      <input matInput [formControl]="firstName" />
       <mat-hint>Hint</mat-hint>
+      <mat-error>
+        <span
+          *ngIf="!customerForm.get('firstName').valid && customerForm.get('firstName').touched"
+        >
+          Please enter a first name.</span
+        >
+      </mat-error>
     </mat-form-field>
   </p>
   <p>

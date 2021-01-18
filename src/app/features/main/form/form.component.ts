@@ -1,11 +1,21 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { ChangeDetectionStrategy } from "@angular/compiler/src/compiler_facade_interface";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Output
+} from "@angular/core";
 import {
   FormGroup,
   FormControl,
   Validators,
-  FormBuilder
+  FormBuilder,
+  ValidatorFn,
+  Validator,
+  ValidationErrors
 } from "@angular/forms";
-import { switchMap } from "rxjs/operators";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 
 @Component({
@@ -19,12 +29,22 @@ export class FormComponent implements OnInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private el: ElementRef) {}
+
+  validate(control: FormControl): ValidationErrors | null {
+    console.log("checking...");
+    //return { incorrect: true };
+    return null;
+  }
+
+  public firstName: FormControl & { focus: () => void } = <any>(
+    new FormControl("firstName", this.validate)
+  );
 
   ngOnInit() {
     this.customerForm = this.fb.group(
       {
-        firstName: new FormControl("firtName", Validators.required),
+        firstName: this.firstName,
         lastName: new FormControl("lastName")
       },
       {
@@ -33,9 +53,19 @@ export class FormComponent implements OnInit {
     );
     this.customerForm.patchValue(this.customer);
     this.customerForm.valueChanges.subscribe(value => {
-      console.info(value);
-      this.customer.firstName = value["firstName"];
+      this.firstName.setErrors({ incorrect: true });
+      this.firstName.markAsTouched();
       return value;
+    });
+
+    this.customerForm.statusChanges.subscribe(status => {
+      console.info(status);
+      const invalidElements = this.el.nativeElement.querySelectorAll(
+        "input.ng-invalid"
+      );
+      if (invalidElements.length > 0) {
+        invalidElements[0].focus();
+      }
     });
   }
 }

@@ -11,15 +11,24 @@ import { AppHeaderComponent } from "./layout/app/app-header/app-header.component
 import { AppFooterComponent } from "./layout/app/app-footer/app-footer.component";
 import { AppDetailsComponent } from "./layout/app/app-details/app-details.component";
 import { MatSidenavModule } from "@angular/material/sidenav";
-import { DetailTabsComponent } from './detail-tabs/detail-tabs.component';
+import { DetailTabsComponent } from "./detail-tabs/detail-tabs.component";
 import { MatTabsModule } from "@angular/material/tabs";
-import { DetailTabComponent } from './detail-tabs/detail-tab/detail-tab.component';
+import { DetailTabComponent } from "./detail-tabs/detail-tab/detail-tab.component";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { NativeElementInjectorDirective } from "./native-element-injector.directive";
 
 @NgModule({
-  imports: [CommonModule, MatToolbarModule, MatSidenavModule, MatTabsModule, MatMenuModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   declarations: [
     TitlebarComponent,
     ToolbarComponent,
@@ -30,7 +39,8 @@ import { MatButtonModule } from "@angular/material/button";
     AppFooterComponent,
     AppDetailsComponent,
     DetailTabsComponent,
-    DetailTabComponent
+    DetailTabComponent,
+    NativeElementInjectorDirective
   ],
   exports: [
     TitlebarComponent,
@@ -42,7 +52,8 @@ import { MatButtonModule } from "@angular/material/button";
     PipelineDirective,
     CommandDirective,
     DetailTabsComponent,
-    DetailTabComponent
+    DetailTabComponent,
+    NativeElementInjectorDirective
   ]
 })
 export class SharedModule {
