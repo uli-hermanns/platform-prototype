@@ -26,9 +26,10 @@ export class FormComponent implements OnInit {
   @Input()
   public customer: CustomerDto = null;
 
-  public customerForm: FormGroup;
+  @ViewChild(FormAutosaveDirective)
+  private form: FormAutosaveDirective;
 
-  @ViewChild(FormAutosaveDirective) form: FormAutosaveDirective;
+  public customerForm: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
