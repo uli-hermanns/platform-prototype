@@ -3,16 +3,17 @@ import {
   ElementRef,
   HostListener,
   Input,
-  OnInit
+  OnInit,
+  ViewChild
 } from "@angular/core";
 import {
   FormGroup,
   FormControl,
   Validators,
-  FormBuilder,
-  ValidationErrors
+  FormBuilder
 } from "@angular/forms";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
+import { FormAutosaveDirective } from "../../../shared/forms/form-autosave.directive";
 
 export type Focusable = { focus: () => void };
 
@@ -26,6 +27,8 @@ export class FormComponent implements OnInit {
   public customer: CustomerDto = null;
 
   public customerForm: FormGroup;
+
+  @ViewChild(FormAutosaveDirective) form: FormAutosaveDirective;
 
   constructor(private fb: FormBuilder) {}
 
