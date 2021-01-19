@@ -51,13 +51,12 @@ export class FormComponent implements OnInit {
       setTimeout(() => {
         if (target.classList.contains("ng-invalid")) {
           target.focus();
-          console.info("Focus Out");
         }
       });
     }
   }
 
-  public firstName: FormControl & { focus: () => void } = <any>(
+  public firstName: FormControl & Focusable = <any>(
     new FormControl("firstName", Validators.required)
   );
 
@@ -75,7 +74,9 @@ export class FormComponent implements OnInit {
     this.customerForm.valueChanges.subscribe(value => {
       if (this.firstName.dirty) {
         if (this.firstName.value.length > 5) {
-          this.firstName.setErrors({ incorrect: true });
+          this.firstName.setErrors({
+            invalid: "Unknown Server Error"
+          });
           this.firstName.markAsTouched();
         }
       }
