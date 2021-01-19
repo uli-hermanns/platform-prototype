@@ -32,7 +32,7 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder, private el: ElementRef) {}
 
   validate(control: FormControl): ValidationErrors | null {
-    console.log("checking...");
+    console.log("Custom Validation");
     //return { incorrect: true };
     return null;
   }
