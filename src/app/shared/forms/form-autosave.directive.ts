@@ -26,7 +26,7 @@ export class FormAutosaveDirective implements OnInit {
           break;
         }
       }
-      if (control !== null) {
+      if ((control !== null) && (control.valid)) {
         this.formSave.emit({ data: data, control: control });
       }
       return data;
@@ -40,6 +40,7 @@ export class FormAutosaveDirective implements OnInit {
   @HostListener("keyup.escape")
   private keyup() {
     this.formGroup?.reset(this.formData);
+    this.formGroup?.updateValueAndValidity();
   }
  
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])

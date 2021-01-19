@@ -48,16 +48,24 @@ export class FormComponent implements OnInit, AfterViewInit {
   public ngAfterViewInit() {}
 
   public ngOnInit() {
-    this.customerForm = this.fb.group({
-      firstName: this.firstName,
-      lastName: this.lastName
-    });
+    this.customerForm = this.fb.group(
+      {
+        firstName: this.firstName,
+        lastName: this.lastName
+      },
+      { updateOn: "blur" }
+    );
   }
 
   public save(control: AbstractControl) {
-    if (control.value.length > 5) {
+    if (control.value.indexOf(" ") > -1) {
       control.setErrors({
-        invalid: "Unknown Server Error."
+        invalid: "The specified name is invalid."
+      });
+    }
+    if (control.value.length > 10) {
+      this.customerForm.setErrors({
+        invalid: "Error field length exceeded."
       });
     }
   }

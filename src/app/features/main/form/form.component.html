@@ -4,7 +4,6 @@
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>
 			<input matInput [formControl]="firstName" />
-			<mat-hint>Hint</mat-hint>
 			<mat-error>
 				<span *ngIf="firstName.errors?.required">
           Please enter a first name.
@@ -19,7 +18,19 @@
 		<mat-form-field appearance="standard">
 			<mat-label>Last Name</mat-label>
 			<input matInput formControlName="lastName" />
-			<mat-hint>Hint</mat-hint>
+			<mat-error>
+				<span *ngIf="lastName.errors?.required">
+          Please enter a last name.
+        </span>
+				<span *ngIf="lastName.errors?.invalid">
+          {{firstName.errors?.invalid}}
+        </span>
+			</mat-error>
 		</mat-form-field>
 	</p>
+	<mat-error>
+		<span *ngIf="customerForm.errors?.invalid">
+      {{customerForm.errors?.invalid}}
+    </span>
+	</mat-error>
 </form>
