@@ -45,15 +45,26 @@ export class FormComponent implements OnInit {
     }
   }
 
-  @HostListener("focusout", ["$event", "$event.target"])
-  private focusout(event: FocusEvent, target: HTMLElement) {
-    console.info(event.relatedTarget);
+  @HostListener("focusout", ["$event", "$event.relatedTarget", "$event.target"])
+  private focusout(
+    event: FocusEvent,
+    related: HTMLElement,
+    target: HTMLElement
+  ) {
+    target.focus();
+    console.info(related);
     if (this.customerForm.dirty) {
-      setTimeout(() => {
-        if (target.classList.contains("ng-invalid")) {
-          target.focus();
-        }
-      });
+      if (target.classList.contains("ng-invalid")) {
+        setTimeout(() => {
+          if (target.classList.contains("ng-invalid")) {
+            target.focus();
+          } else {
+            related.focus();
+          }
+        });
+      } else {
+        related.focus();
+      }
     }
   }
 
