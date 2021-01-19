@@ -1,25 +1,20 @@
-import { ChangeDetectionStrategy } from "@angular/compiler/src/compiler_facade_interface";
 import {
-  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
   Input,
-  OnInit,
-  Output
+  OnInit
 } from "@angular/core";
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder,
-  ValidatorFn,
-  Validator,
   ValidationErrors
 } from "@angular/forms";
-import { Event } from "@angular/router";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
-import { DomHelper } from "../../../core/data/dom-helper";
+
+export type Focusable = { focus: () => void };
 
 @Component({
   selector: "app-form",
@@ -50,13 +45,12 @@ export class FormComponent implements OnInit {
     }
   }
 
-  @HostListener("focusout", ["$event"])
-  private focusout(event: FocusEvent) {
+  @HostListener("focusout", ["$event.target"])
+  private focusout(target: HTMLElement) {
     if (this.customerForm.dirty) {
       setTimeout(() => {
-        const element: HTMLElement = <HTMLElement>event.target;
-        if (element.classList.contains("ng-invalid")) {
-          (<any>event.target).focus();
+        if (target.classList.contains("ng-invalid")) {
+          target.focus();
           console.info("Focus Out");
         }
       });
@@ -64,7 +58,7 @@ export class FormComponent implements OnInit {
   }
 
   public firstName: FormControl & { focus: () => void } = <any>(
-    new FormControl("firstName", this.validate)
+    new FormControl("firstName", Validators.required)
   );
 
   ngOnInit() {

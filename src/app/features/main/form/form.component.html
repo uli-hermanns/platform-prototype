@@ -5,10 +5,12 @@
 			<input matInput [formControl]="firstName" (keyup.esc)="reset(firstName)"/>
 			<mat-hint>Hint</mat-hint>
 			<mat-error>
-				<span
-          *ngIf="!customerForm.get('firstName').valid && customerForm.get('firstName').touched"
-        >
-          Please enter a first name.</span>
+				<span *ngIf="firstName.errors.required">
+          Please enter a first name.
+        </span>
+				<span *ngIf="firstName.errors.invalid">
+          Please enter a valid first name.
+        </span>
 			</mat-error>
 		</mat-form-field>
 	</p>
