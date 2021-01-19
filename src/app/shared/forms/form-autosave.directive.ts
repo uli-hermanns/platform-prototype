@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Input } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"

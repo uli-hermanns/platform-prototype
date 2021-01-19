@@ -19,6 +19,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { NativeElementInjectorDirective } from "./forms/native-element-injector.directive";
 import { FormAutosaveDirective } from "./forms/form-autosave.directive";
+import { FormAutoresetDirective } from "./forms/form-autoreset.directive";
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { FormAutosaveDirective } from "./forms/form-autosave.directive";
     DetailTabsComponent,
     DetailTabComponent,
     NativeElementInjectorDirective,
-    FormAutosaveDirective
+    FormAutosaveDirective,
+    FormAutoresetDirective
   ],
   exports: [
     TitlebarComponent,
@@ -56,7 +58,8 @@ import { FormAutosaveDirective } from "./forms/form-autosave.directive";
     DetailTabsComponent,
     DetailTabComponent,
     NativeElementInjectorDirective,
-    FormAutosaveDirective
+    FormAutosaveDirective,
+    FormAutoresetDirective
   ]
 })
 export class SharedModule {
