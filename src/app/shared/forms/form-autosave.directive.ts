@@ -1,5 +1,5 @@
-import { Directive, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from "@angular/core";
+import { FormGroup, NgForm } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
@@ -8,10 +8,11 @@ export class FormAutosaveDirective implements OnInit {
 
   @Input("flexFormAutosave") formGroup: FormGroup;
   @Input("flexFormData") formData: Object;
+  @ViewChild('f') form: NgForm;
 
-  @Output("flexFormSave") formSave = new EventEmitter();
+  @Output("ngSubmit") formSave = new EventEmitter();
 
-  constructor() {
+  constructor(private el: ElementRef<HTMLFormElement>) {
     console.info("Form Autosave Directive initialized.");
   }
 
