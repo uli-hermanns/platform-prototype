@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
+  HostListener,
   Input,
   OnInit,
   Output
@@ -35,6 +36,11 @@ export class FormComponent implements OnInit {
     console.log("Custom Validation");
     //return { incorrect: true };
     return null;
+  }
+
+  @HostListener("focusout", ["$event"])
+  private focusout(event: FocusEvent) {
+    console.info("Focus Out");
   }
 
   public firstName: FormControl & { focus: () => void } = <any>(
