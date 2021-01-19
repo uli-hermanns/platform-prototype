@@ -1,29 +1,33 @@
 import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { FormGroup, NgForm } from "@angular/forms";
+import { FormBuilder, FormControl,  FormGroup, NgForm } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
 })
 export class FormAutosaveDirective implements OnInit {
 
-  @Input("flexFormAutosave") formGroup: FormGroup;
-  @Input("flexFormData") formData: Object;
-  @ViewChild('f') form: NgForm;
+  @Input("flexFormAutosave") formGroup: FormGroup | undefined;
+  @Input("flexFormData") formData: Object | undefined;
 
   @Output("ngSubmit") formSave = new EventEmitter();
 
-  constructor(private el: ElementRef<HTMLFormElement>) {
+  constructor(private fb: FormBuilder) {
     console.info("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
-    this.formGroup.patchValue(this.formData);
-    this.formGroup.valueChanges.subscribe(data => {
+    this.formGroup?.patchValue(this.formData);
+    this.formGroup?.valueChanges.subscribe(data => {
       console.info("Form Autosave Directive saving.");
       this.formSave.emit({ data: data });
       return data;
     });
   }
+
+  public group(controls: { [key: string]: FormControl }) {
+    return this.fb.group(controls, { updateOn: 'blue' });
+  }
+
   @HostListener("keyup.escape")
   private keyup() {
     this.formGroup?.reset(this.formData);
@@ -31,7 +35,7 @@ export class FormAutosaveDirective implements OnInit {
  
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
   private focusout(related: HTMLElement | undefined, target: HTMLElement) {
-    if (this.formGroup.dirty) {
+    if (this.formGroup?.dirty) {
       if (related?.classList.contains("ignore")) {
         related.classList.remove("ignore");
       } else {

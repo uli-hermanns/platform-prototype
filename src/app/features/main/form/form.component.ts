@@ -27,7 +27,7 @@ export class FormComponent implements OnInit {
   public customer: CustomerDto = null;
 
   @ViewChild(FormAutosaveDirective)
-  private form: FormAutosaveDirective;
+  private autoSaveForm: FormAutosaveDirective;
 
   public customerForm: FormGroup;
 
@@ -49,9 +49,7 @@ export class FormComponent implements OnInit {
         firstName: this.firstName,
         lastName: this.lastName
       },
-      {
-        updateOn: "blur"
-      }
+      { updateOn: "blur" }
     );
   }
 
