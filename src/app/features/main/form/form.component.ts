@@ -29,22 +29,6 @@ export class FormComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private el: ElementRef<HTMLElement>) {}
 
-  validate(control: FormControl): ValidationErrors | null {
-    console.log("Custom Validation");
-    //return { incorrect: true };
-    return null;
-  }
-
-  public reset(control: FormControl) {
-    this.customerForm.reset();
-    for (let key in this.customerForm.controls) {
-      if (this.customerForm.controls[key] == control) {
-        control.reset(this.customer[key]);
-        break;
-      }
-    }
-  }
-
   public firstName: FormControl & Focusable = <any>(
     new FormControl("firstName", Validators.required)
   );
@@ -64,7 +48,7 @@ export class FormComponent implements OnInit {
       if (this.firstName.dirty) {
         if (this.firstName.value.length > 5) {
           this.firstName.setErrors({
-            invalid: "Unknown Server Error"
+            invalid: "Unknown Server Error."
           });
         }
       }

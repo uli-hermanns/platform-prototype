@@ -1,8 +1,8 @@
-<form [formGroup]="customerForm" [flexFormAutosave]="customerForm">
+<form [formGroup]="customerForm" [flexFormAutosave]="customerForm" [flexFormData]="customer">
 	<p>
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>
-			<input matInput [formControl]="firstName" flexFormAutoreset (keyup.esc)="reset(firstName)"/>
+			<input matInput [formControl]="firstName" />
 			<mat-hint>Hint</mat-hint>
 			<mat-error>
 				<span *ngIf="firstName.errors?.required">
