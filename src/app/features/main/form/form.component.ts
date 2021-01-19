@@ -54,7 +54,8 @@ export class FormComponent implements OnInit {
   private focusout(event: FocusEvent) {
     if (this.customerForm.dirty) {
       setTimeout(() => {
-        if (this.firstName.invalid) {
+        const element: HTMLElement = <HTMLElement>event.target;
+        if (element.classList.contains("ng-invalid")) {
           (<any>event.target).focus();
           console.info("Focus Out");
         }
@@ -79,20 +80,12 @@ export class FormComponent implements OnInit {
     this.customerForm.patchValue(this.customer);
     this.customerForm.valueChanges.subscribe(value => {
       if (this.firstName.dirty) {
-        this.firstName.setErrors({ incorrect: true });
-        this.firstName.markAsTouched();
+        if (this.firstName.value.length > 5) {
+          this.firstName.setErrors({ incorrect: true });
+          this.firstName.markAsTouched();
+        }
       }
       return value;
-    });
-
-    this.customerForm.statusChanges.subscribe(status => {
-      console.info(status);
-      const invalidElements = this.el.nativeElement.querySelectorAll(
-        "input.ng-invalid"
-      );
-      if (invalidElements.length > 0) {
-        (<any>invalidElements[0]).focus();
-      }
     });
   }
 }
