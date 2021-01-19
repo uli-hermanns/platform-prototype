@@ -27,32 +27,37 @@ export class FormComponent implements OnInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private el: ElementRef<HTMLElement>) {}
+  constructor(private fb: FormBuilder) {}
 
-  public firstName: FormControl & Focusable = <any>(
-    new FormControl("firstName", Validators.required)
+  public firstName: FormControl = new FormControl(
+    "firstName",
+    Validators.required
   );
 
-  ngOnInit() {
+  public lastName: FormControl = new FormControl(
+    "lastName",
+    Validators.required
+  );
+
+  public ngOnInit() {
     this.customerForm = this.fb.group(
       {
         firstName: this.firstName,
-        lastName: new FormControl("lastName")
+        lastName: this.lastName
       },
       {
         updateOn: "blur"
       }
     );
-    this.customerForm.patchValue(this.customer);
-    this.customerForm.valueChanges.subscribe(value => {
-      if (this.firstName.dirty) {
-        if (this.firstName.value.length > 5) {
-          this.firstName.setErrors({
-            invalid: "Unknown Server Error."
-          });
-        }
+  }
+
+  public save() {
+    if (this.firstName.dirty) {
+      if (this.firstName.value.length > 5) {
+        this.firstName.setErrors({
+          invalid: "Unknown Server Error."
+        });
       }
-      return value;
-    });
+    }
   }
 }

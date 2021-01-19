@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" [flexFormAutosave]="customerForm" [flexFormData]="customer">
+<form [formGroup]="customerForm" [flexFormAutosave]="customerForm" [flexFormData]="customer" (flexFormSave)="save()">
 	<p>
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>

@@ -1,19 +1,28 @@
-import { Directive, HostListener, Input } from "@angular/core";
+import { Directive, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
 })
-export class FormAutosaveDirective {
+export class FormAutosaveDirective implements OnInit {
 
   @Input("flexFormAutosave") formGroup: FormGroup;
-
   @Input("flexFormData") formData: Object;
+
+  @Output("flexFormSave") formSave = new EventEmitter();
 
   constructor() {
     console.info("Form Autosave Directive initialized.");
   }
 
+  public ngOnInit() {
+    this.formGroup.patchValue(this.formData);
+    this.formGroup.valueChanges.subscribe(data => {
+      console.info("Form Autosave Directive saving.");
+      this.formSave.emit({ data: data });
+      return data;
+    });
+  }
   @HostListener("keyup.escape")
   private keyup() {
     this.formGroup?.reset(this.formData);
