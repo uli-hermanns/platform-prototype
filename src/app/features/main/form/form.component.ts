@@ -45,25 +45,6 @@ export class FormComponent implements OnInit {
     }
   }
 
-  @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
-  private focusout(related: HTMLElement, target: HTMLElement) {
-    if (this.customerForm.dirty) {
-      if (related.classList.contains("ignore")) {
-        related.classList.remove("ignore");
-      } else {
-        target.focus();
-        setTimeout(() => {
-          console.info(target.className);
-          if (!target.classList.contains("ng-invalid")) {
-            // console.info(related);
-            related.classList.add("ignore");
-            related.focus();
-          }
-        });
-      }
-    }
-  }
-
   public firstName: FormControl & Focusable = <any>(
     new FormControl("firstName", Validators.required)
   );

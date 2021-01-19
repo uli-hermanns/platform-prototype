@@ -2,7 +2,7 @@ import { Directive, ElementRef, Optional } from "@angular/core";
 import { NgControl, NgModel } from "@angular/forms";
 
 @Directive({
-  selector: "[formControlName], [formControl]" // or 'input, select, textarea' - but then your controls won't be handled and also checking for undefined would be necessary
+  selector: "[formControlName], [formControl]"
 })
 export class NativeElementInjectorDirective {
   constructor(private el: ElementRef<HTMLElement>, private control: NgControl) {

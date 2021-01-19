@@ -17,7 +17,8 @@ import { DetailTabComponent } from "./detail-tabs/detail-tab/detail-tab.componen
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { NativeElementInjectorDirective } from "./native-element-injector.directive";
+import { NativeElementInjectorDirective } from "./forms/native-element-injector.directive";
+import { FormAutosaveDirective } from "./forms/form-autosave.directive";
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { NativeElementInjectorDirective } from "./native-element-injector.direct
     AppDetailsComponent,
     DetailTabsComponent,
     DetailTabComponent,
-    NativeElementInjectorDirective
+    NativeElementInjectorDirective,
+    FormAutosaveDirective
   ],
   exports: [
     TitlebarComponent,
@@ -53,7 +55,8 @@ import { NativeElementInjectorDirective } from "./native-element-injector.direct
     CommandDirective,
     DetailTabsComponent,
     DetailTabComponent,
-    NativeElementInjectorDirective
+    NativeElementInjectorDirective,
+    FormAutosaveDirective
   ]
 })
 export class SharedModule {
