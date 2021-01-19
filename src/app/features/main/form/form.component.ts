@@ -45,8 +45,9 @@ export class FormComponent implements OnInit {
     }
   }
 
-  @HostListener("focusout", ["$event.target"])
-  private focusout(target: HTMLElement) {
+  @HostListener("focusout", ["$event", "$event.target"])
+  private focusout(event: FocusEvent, target: HTMLElement) {
+    console.info(event.relatedTarget);
     if (this.customerForm.dirty) {
       setTimeout(() => {
         if (target.classList.contains("ng-invalid")) {
@@ -77,7 +78,6 @@ export class FormComponent implements OnInit {
           this.firstName.setErrors({
             invalid: "Unknown Server Error"
           });
-          this.firstName.markAsTouched();
         }
       }
       return value;
