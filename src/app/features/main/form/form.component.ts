@@ -3,6 +3,7 @@ import {
   ElementRef,
   HostListener,
   Input,
+  AfterViewInit,
   OnInit,
   ViewChild
 } from "@angular/core";
@@ -10,7 +11,8 @@ import {
   FormGroup,
   FormControl,
   Validators,
-  FormBuilder
+  FormBuilder,
+  AbstractControl
 } from "@angular/forms";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 import { FormAutosaveDirective } from "../../../shared/forms/form-autosave.directive";
@@ -22,7 +24,7 @@ export type Focusable = { focus: () => void };
   templateUrl: "./form.component.html",
   styleUrls: ["./form.component.css"]
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, AfterViewInit {
   @Input()
   public customer: CustomerDto = null;
 
@@ -43,23 +45,20 @@ export class FormComponent implements OnInit {
     Validators.required
   );
 
+  public ngAfterViewInit() {}
+
   public ngOnInit() {
-    this.customerForm = this.fb.group(
-      {
-        firstName: this.firstName,
-        lastName: this.lastName
-      },
-      { updateOn: "blur" }
-    );
+    this.customerForm = this.fb.group({
+      firstName: this.firstName,
+      lastName: this.lastName
+    });
   }
 
-  public save() {
-    if (this.firstName.dirty) {
-      if (this.firstName.value.length > 5) {
-        this.firstName.setErrors({
-          invalid: "Unknown Server Error."
-        });
-      }
+  public save(control: AbstractControl) {
+    if (control.value.length > 5) {
+      control.setErrors({
+        invalid: "Unknown Server Error."
+      });
     }
   }
 }

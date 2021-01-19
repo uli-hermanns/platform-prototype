@@ -1,5 +1,5 @@
 import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { FormBuilder, FormControl,  FormGroup, NgForm } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormControl,  FormGroup, NgForm } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
@@ -18,8 +18,17 @@ export class FormAutosaveDirective implements OnInit {
   public ngOnInit() {
     this.formGroup?.patchValue(this.formData);
     this.formGroup?.valueChanges.subscribe(data => {
-      console.info("Form Autosave Directive saving.");
-      this.formSave.emit({ data: data });
+      console.info("Form Autosave Directive saving.", data);
+      var control: AbstractControl = null;
+      for(var key in this.formGroup.controls) {
+        control = this.formGroup.controls[key];
+        if (control.dirty) {
+          break;
+        }
+      }
+      if (control !== null) {
+        this.formSave.emit({ data: data, control: control });
+      }
       return data;
     });
   }

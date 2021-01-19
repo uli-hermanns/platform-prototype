@@ -1,4 +1,5 @@
-<form [formGroup]="customerForm" [flexFormAutosave]="customerForm" [flexFormData]="customer" (ngSubmit)="save()">
+<form [formGroup]="customerForm" [flexFormAutosave]="customerForm" [flexFormData]="customer"
+	(ngSubmit)="save($event.control)">
 	<p>
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>
