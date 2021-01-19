@@ -54,11 +54,7 @@ export class FormComponent implements OnInit {
   private focusout(event: FocusEvent) {
     if (this.customerForm.dirty) {
       setTimeout(() => {
-        if (
-          !DomHelper.isDescendant(this.el.nativeElement, <HTMLElement>(
-            document.activeElement
-          ))
-        ) {
+        if (this.firstName.invalid) {
           (<any>event.target).focus();
           console.info("Focus Out");
         }
