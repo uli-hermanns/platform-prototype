@@ -17,6 +17,7 @@ import {
   Validator,
   ValidationErrors
 } from "@angular/forms";
+import { Event } from "@angular/router";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 
 @Component({
@@ -30,7 +31,7 @@ export class FormComponent implements OnInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private el: ElementRef) {}
+  constructor(private fb: FormBuilder, private el: ElementRef<HTMLElement>) {}
 
   validate(control: FormControl): ValidationErrors | null {
     console.log("Custom Validation");
@@ -38,9 +39,41 @@ export class FormComponent implements OnInit {
     return null;
   }
 
+  private isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
+    var node = child.parentNode;
+    while (node !== null) {
+      if (node === parent) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
+
+  public reset(control: FormControl) {
+    this.customerForm.reset();
+    for (let key in this.customerForm.controls) {
+      if (this.customerForm.controls[key] == control) {
+        control.reset(this.customer[key]);
+        break;
+      }
+    }
+  }
+
   @HostListener("focusout", ["$event"])
   private focusout(event: FocusEvent) {
-    console.info("Focus Out");
+    if (this.customerForm.dirty) {
+      setTimeout(() => {
+        if (
+          !this.isDescendant(this.el.nativeElement, <HTMLElement>(
+            document.activeElement
+          ))
+        ) {
+          (<any>event.target).focus();
+          console.info("Focus Out");
+        }
+      });
+    }
   }
 
   public firstName: FormControl & { focus: () => void } = <any>(
@@ -59,8 +92,10 @@ export class FormComponent implements OnInit {
     );
     this.customerForm.patchValue(this.customer);
     this.customerForm.valueChanges.subscribe(value => {
-      this.firstName.setErrors({ incorrect: true });
-      this.firstName.markAsTouched();
+      if (this.firstName.dirty) {
+        this.firstName.setErrors({ incorrect: true });
+        this.firstName.markAsTouched();
+      }
       return value;
     });
 
@@ -70,7 +105,7 @@ export class FormComponent implements OnInit {
         "input.ng-invalid"
       );
       if (invalidElements.length > 0) {
-        invalidElements[0].focus();
+        (<any>invalidElements[0]).focus();
       }
     });
   }

@@ -1,23 +1,22 @@
 <form [formGroup]="customerForm">
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>First Name</mat-label>
-      <input matInput [formControl]="firstName" />
-      <mat-hint>Hint</mat-hint>
-      <mat-error>
-        <span
+	<p>
+		<mat-form-field appearance="standard">
+			<mat-label>First Name</mat-label>
+			<input matInput [formControl]="firstName" (keyup.esc)="reset(firstName)"/>
+			<mat-hint>Hint</mat-hint>
+			<mat-error>
+				<span
           *ngIf="!customerForm.get('firstName').valid && customerForm.get('firstName').touched"
         >
-          Please enter a first name.</span
-        >
-      </mat-error>
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field appearance="standard">
-      <mat-label>Last Name</mat-label>
-      <input matInput formControlName="lastName" />
-      <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-  </p>
+          Please enter a first name.</span>
+			</mat-error>
+		</mat-form-field>
+	</p>
+	<p>
+		<mat-form-field appearance="standard">
+			<mat-label>Last Name</mat-label>
+			<input matInput formControlName="lastName" />
+			<mat-hint>Hint</mat-hint>
+		</mat-form-field>
+	</p>
 </form>
