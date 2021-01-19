@@ -50,9 +50,8 @@ export class FormComponent implements OnInit {
     if (this.customerForm.dirty) {
       target.focus();
       setTimeout(() => {
-        if (target.classList.contains("ng-invalid")) {
-          target.focus();
-        } else {
+        if (!target.classList.contains("ng-invalid")) {
+          console.info(related);
           related.focus();
         }
       });
