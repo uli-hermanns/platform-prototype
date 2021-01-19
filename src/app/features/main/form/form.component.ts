@@ -19,6 +19,7 @@ import {
 } from "@angular/forms";
 import { Event } from "@angular/router";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
+import { DomHelper } from "../../../core/data/dom-helper";
 
 @Component({
   selector: "app-form",
@@ -39,17 +40,6 @@ export class FormComponent implements OnInit {
     return null;
   }
 
-  private isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
-    var node = child.parentNode;
-    while (node !== null) {
-      if (node === parent) {
-        return true;
-      }
-      node = node.parentNode;
-    }
-    return false;
-  }
-
   public reset(control: FormControl) {
     this.customerForm.reset();
     for (let key in this.customerForm.controls) {
@@ -65,7 +55,7 @@ export class FormComponent implements OnInit {
     if (this.customerForm.dirty) {
       setTimeout(() => {
         if (
-          !this.isDescendant(this.el.nativeElement, <HTMLElement>(
+          !DomHelper.isDescendant(this.el.nativeElement, <HTMLElement>(
             document.activeElement
           ))
         ) {
