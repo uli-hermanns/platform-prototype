@@ -17,7 +17,6 @@ import { DetailTabComponent } from "./detail-tabs/detail-tab/detail-tab.componen
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
-import { NativeElementInjectorDirective } from "./forms/native-element-injector.directive";
 import { FormAutosaveDirective } from "./forms/form-autosave.directive";
 
 @NgModule({
@@ -41,7 +40,6 @@ import { FormAutosaveDirective } from "./forms/form-autosave.directive";
     AppDetailsComponent,
     DetailTabsComponent,
     DetailTabComponent,
-    NativeElementInjectorDirective,
     FormAutosaveDirective
   ],
   exports: [
@@ -55,7 +53,6 @@ import { FormAutosaveDirective } from "./forms/form-autosave.directive";
     CommandDirective,
     DetailTabsComponent,
     DetailTabComponent,
-    NativeElementInjectorDirective,
     FormAutosaveDirective
   ]
 })

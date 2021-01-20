@@ -45,7 +45,6 @@ export class FormAutosaveDirective implements OnInit {
  
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
   private handleFocusOut(related: HTMLElement | undefined, target: HTMLElement) {
-    if (this.form.dirty) {
       if (related?.classList.contains("flex-ignore")) {
         related.classList.remove("flex-ignore");
       } else {
@@ -57,6 +56,5 @@ export class FormAutosaveDirective implements OnInit {
           }
         });
       }
-    }
   }
 }
