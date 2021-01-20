@@ -1,5 +1,6 @@
-import { Directive, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
+import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormGroup, FormGroupDirective } from "@angular/forms";
+import { DomHelper } from "../../core/data/dom-helper";
 
 @Directive({
   selector: "[flexFormAutosave]"
@@ -12,11 +13,12 @@ export class FormAutosaveDirective implements OnInit {
   @Output("flexFormSave") 
   formSave = new EventEmitter();
 
-  constructor(private formGroupDirective: FormGroupDirective) {
+  constructor(private formGroupDirective: FormGroupDirective, private el: ElementRef<HTMLFormElement>) {
     console.info("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
+
     this.form.patchValue(this.formData);
     this.form.valueChanges.subscribe(data => {
       var control: AbstractControl = null;
@@ -31,6 +33,20 @@ export class FormAutosaveDirective implements OnInit {
       }
       return data;
     });
+  }
+
+  @HostListener('document:mousedown', ['$event'])
+  private handleMouseDown(event: MouseEvent)
+  {
+    if (!DomHelper.isDescendant(this.el.nativeElement, <any>event.target)) {
+      this.form.updateValueAndValidity({onlySelf: false, emitEvent: false});
+      if (this.form.invalid) {
+        alert("Inavlid Input!");
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        return false;
+      }
+    }
   }
 
   private get form(): FormGroup {

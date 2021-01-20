@@ -33,7 +33,9 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {
+    // el.nativeElement.setPointerCapture();
+  }
 
   public firstName: FormControl = new FormControl(
     "firstName",
