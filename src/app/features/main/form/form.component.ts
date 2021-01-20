@@ -66,17 +66,6 @@ export class FormComponent implements OnInit, AfterViewInit {
       });
     }
 
-    /*
-    if (control.value.length > 10) {
-      control.setErrors({
-        error: true
-      });
-      this.customerForm.setErrors({
-        invalid: "Error field length exceeded."
-      });
-    }
-    */
-
     // saves changes
     if (!control.errors && !this.customerForm.errors) {
       Object.assign(this.customer, this.customerForm.value);
