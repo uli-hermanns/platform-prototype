@@ -1,4 +1,4 @@
-import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Optional, Output, ViewChild } from "@angular/core";
+import { Directive, EventEmitter, HostListener, Input, OnInit, Optional, Output, ViewChild } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl,  FormGroup, FormGroupDirective,  FormGroupName,    NgForm } from "@angular/forms";
 
 @Directive({
@@ -27,7 +27,6 @@ export class FormAutosaveDirective implements OnInit {
         }
       }
       if ((control !== null) && (control.valid)) {
-        // this.formGroupDirective.ngSubmit.emit({ data: data, control: control });
         this.formSave.emit({ data: data, control: control });
       }
       return data;
@@ -36,10 +35,6 @@ export class FormAutosaveDirective implements OnInit {
 
   private get form(): FormGroup {
     return this.formGroupDirective.form;
-  }
-
-  public group(controls: { [key: string]: FormControl }) {
-    return this.fb.group(controls, { updateOn: 'blur' });
   }
 
   @HostListener("keyup.escape")
