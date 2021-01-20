@@ -61,12 +61,13 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public save(control: AbstractControl, data: CustomerDto): void {
     // validates the model
-
+    /*
     if (control.value.indexOf(" ") > -1) {
       control.setErrors({
         invalid: "The specified name is invalid."
       });
     }
+    */
 
     // saves changes
     if (!control.errors && !this.customerForm.errors) {

@@ -39,7 +39,7 @@ export class FormAutosaveDirective implements OnInit {
   private handleMouseDown(event: MouseEvent)
   {
     if (!DomHelper.isDescendant(this.el.nativeElement, <any>event.target)) {
-      this.form.updateValueAndValidity({onlySelf: false, emitEvent: false});
+      this.form.updateValueAndValidity();
       if (this.form.invalid) {
         alert("Inavlid Input!");
         event.preventDefault();
