@@ -9,7 +9,7 @@ export class FormAutosaveDirective implements OnInit {
   @Input("flexFormAutosave") 
   formData: Object | undefined;
 
-  @Output("ngSubmit") 
+  @Output("flexFormSave") 
   formSave = new EventEmitter();
 
   constructor(private fb: FormBuilder, private formGroupDirective: FormGroupDirective,) {
