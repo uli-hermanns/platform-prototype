@@ -50,7 +50,7 @@ export class FormAutosaveDirective implements OnInit {
       this.form.updateValueAndValidity();
       setTimeout(() => {
         if (this.form.invalid) {
-          alert("Inavlid Input!");
+          this.el.nativeElement.setPointerCapture(1);
         }
       });
     }
