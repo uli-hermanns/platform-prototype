@@ -2,7 +2,7 @@
 	<p>
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>
-			<input matInput [formControl]="firstName" />
+			<input matInput [formControl]="firstName"/>
 			<mat-error>
 				<span *ngIf="firstName.errors?.required">
           Please enter a first name.
@@ -17,6 +17,9 @@
 		<mat-form-field appearance="standard">
 			<mat-label>Last Name</mat-label>
 			<input matInput formControlName="lastName" />
+			<button mat-button matSuffix mat-stroked-button aria-label="search">
+        <mat-icon>search</mat-icon>
+      </button>
 			<mat-error>
 				<span *ngIf="lastName.errors?.required">
           Please enter a last name.
