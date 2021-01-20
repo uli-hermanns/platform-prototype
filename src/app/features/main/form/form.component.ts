@@ -57,7 +57,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public save(control: AbstractControl): void {
+  public save(control: AbstractControl, data: CustomerDto): void {
     // validates the model
 
     if (control.value.indexOf(" ") > -1) {
