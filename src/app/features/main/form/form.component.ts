@@ -57,16 +57,29 @@ export class FormComponent implements OnInit, AfterViewInit {
     );
   }
 
-  public save(control: AbstractControl) {
+  public save(control: AbstractControl): void {
+    // validates the model
+
     if (control.value.indexOf(" ") > -1) {
       control.setErrors({
         invalid: "The specified name is invalid."
       });
     }
+
+    /*
     if (control.value.length > 10) {
+      control.setErrors({
+        error: true
+      });
       this.customerForm.setErrors({
         invalid: "Error field length exceeded."
       });
+    }
+    */
+
+    // saves changes
+    if (!control.errors && !this.customerForm.errors) {
+      Object.assign(this.customer, this.customerForm.value);
     }
   }
 }

@@ -46,13 +46,13 @@ export class FormAutosaveDirective implements OnInit {
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
   private focusout(related: HTMLElement | undefined, target: HTMLElement) {
     if (this.formGroup?.dirty) {
-      if (related?.classList.contains("ignore")) {
-        related.classList.remove("ignore");
+      if (related?.classList.contains("flex-ignore")) {
+        related.classList.remove("flex-ignore");
       } else {
         target.focus();
         setTimeout(() => {
           if (!target.classList.contains("ng-invalid")) {
-            related?.classList.add("ignore");
+            related?.classList.add("flex-ignore");
             related?.focus();
           }
         });
