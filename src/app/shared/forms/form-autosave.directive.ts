@@ -1,5 +1,5 @@
-import { Directive, EventEmitter, HostListener, Input, OnInit, Output, Self } from "@angular/core";
-import { AbstractControl, FormGroup, FormGroupDirective, NgForm } from "@angular/forms";
+import { Directive, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
+import { AbstractControl, FormGroup, FormGroupDirective } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
