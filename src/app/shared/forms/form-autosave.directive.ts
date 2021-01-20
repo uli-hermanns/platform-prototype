@@ -19,7 +19,6 @@ export class FormAutosaveDirective implements OnInit {
   public ngOnInit() {
     this.form.patchValue(this.formData);
     this.form.valueChanges.subscribe(data => {
-      console.info("Form Autosave Directive saving.", data);
       var control: AbstractControl = null;
       for(var key in this.form.controls) {
         control = this.form.controls[key];
@@ -40,7 +39,7 @@ export class FormAutosaveDirective implements OnInit {
   }
 
   public group(controls: { [key: string]: FormControl }) {
-    return this.fb.group(controls, { updateOn: 'blue' });
+    return this.fb.group(controls, { updateOn: 'blur' });
   }
 
   @HostListener("keyup.escape")
