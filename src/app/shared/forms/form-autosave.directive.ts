@@ -1,36 +1,42 @@
-import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { AbstractControl, FormBuilder, FormControl,  FormGroup, NgForm } from "@angular/forms";
+import { Directive, ElementRef,  EventEmitter, HostListener, Input, OnInit, Optional, Output, ViewChild } from "@angular/core";
+import { AbstractControl, FormBuilder, FormControl,  FormGroup, FormGroupDirective,  FormGroupName,    NgForm } from "@angular/forms";
 
 @Directive({
   selector: "[flexFormAutosave]"
 })
 export class FormAutosaveDirective implements OnInit {
 
-  @Input("flexFormAutosave") formGroup: FormGroup | undefined;
-  @Input("flexFormData") formData: Object | undefined;
+  @Input("flexFormAutosave") 
+  formData: Object | undefined;
 
-  @Output("ngSubmit") formSave = new EventEmitter();
+  @Output("ngSubmit") 
+  formSave = new EventEmitter();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private formGroupDirective: FormGroupDirective,) {
     console.info("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
-    this.formGroup?.patchValue(this.formData);
-    this.formGroup?.valueChanges.subscribe(data => {
+    this.form.patchValue(this.formData);
+    this.form.valueChanges.subscribe(data => {
       console.info("Form Autosave Directive saving.", data);
       var control: AbstractControl = null;
-      for(var key in this.formGroup.controls) {
-        control = this.formGroup.controls[key];
+      for(var key in this.form.controls) {
+        control = this.form.controls[key];
         if (control.dirty) {
           break;
         }
       }
       if ((control !== null) && (control.valid)) {
+        // this.formGroupDirective.ngSubmit.emit({ data: data, control: control });
         this.formSave.emit({ data: data, control: control });
       }
       return data;
     });
+  }
+
+  private get form(): FormGroup {
+    return this.formGroupDirective.form;
   }
 
   public group(controls: { [key: string]: FormControl }) {
@@ -38,14 +44,14 @@ export class FormAutosaveDirective implements OnInit {
   }
 
   @HostListener("keyup.escape")
-  private keyup() {
-    this.formGroup?.reset(this.formData);
-    this.formGroup?.updateValueAndValidity();
+  private handleEscape() {
+    this.form.reset(this.formData);
+    this.form.updateValueAndValidity();
   }
  
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
-  private focusout(related: HTMLElement | undefined, target: HTMLElement) {
-    if (this.formGroup?.dirty) {
+  private handleFocusOut(related: HTMLElement | undefined, target: HTMLElement) {
+    if (this.form.dirty) {
       if (related?.classList.contains("flex-ignore")) {
         related.classList.remove("flex-ignore");
       } else {
