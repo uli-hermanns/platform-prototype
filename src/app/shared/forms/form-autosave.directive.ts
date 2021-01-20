@@ -1,4 +1,12 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from "@angular/core";
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output
+} from "@angular/core";
 import { AbstractControl, FormGroup, FormGroupDirective } from "@angular/forms";
 import { DomHelper } from "../../core/data/dom-helper";
 
@@ -6,46 +14,45 @@ import { DomHelper } from "../../core/data/dom-helper";
   selector: "[flexFormAutosave]"
 })
 export class FormAutosaveDirective implements OnInit {
-
-  @Input("flexFormAutosave") 
+  @Input("flexFormAutosave")
   formData: Object | undefined;
 
-  @Output("flexFormSave") 
+  @Output("flexFormSave")
   formSave = new EventEmitter();
 
-  constructor(private formGroupDirective: FormGroupDirective, private el: ElementRef<HTMLFormElement>) {
+  constructor(
+    private formGroupDirective: FormGroupDirective,
+    private el: ElementRef<HTMLFormElement>
+  ) {
     console.info("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
-
     this.form.patchValue(this.formData);
     this.form.valueChanges.subscribe(data => {
       var control: AbstractControl = null;
-      for(var key in this.form.controls) {
+      for (var key in this.form.controls) {
         control = this.form.controls[key];
         if (control.dirty) {
           break;
         }
       }
-      if ((control !== null) && (control.valid)) {
+      if (control !== null && control.valid) {
         this.formSave.emit({ data: data, control: control });
       }
       return data;
     });
   }
 
-  @HostListener('document:mousedown', ['$event'])
-  private handleMouseDown(event: MouseEvent)
-  {
+  @HostListener("document:mousedown", ["$event"])
+  private handleMouseDown(event: MouseEvent) {
     if (!DomHelper.isDescendant(this.el.nativeElement, <any>event.target)) {
       this.form.updateValueAndValidity();
-      if (this.form.invalid) {
-        alert("Inavlid Input!");
-        event.preventDefault();
-        event.stopImmediatePropagation();
-        return false;
-      }
+      setTimeout(() => {
+        if (this.form.invalid) {
+          alert("Inavlid Input!");
+        }
+      });
     }
   }
 
@@ -58,7 +65,7 @@ export class FormAutosaveDirective implements OnInit {
     this.form.reset(this.formData);
     this.form.updateValueAndValidity();
   }
- 
+
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
   private handleFocusOut(related: HTMLElement | undefined, target: HTMLElement) {
       if (related?.classList.contains("flex-ignore")) {
@@ -73,4 +80,5 @@ export class FormAutosaveDirective implements OnInit {
         });
       }
   }
+  
 }
