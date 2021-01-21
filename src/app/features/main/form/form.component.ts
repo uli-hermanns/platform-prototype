@@ -33,9 +33,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    // el.nativeElement.setPointerCapture();
-  }
+  constructor(private fb: FormBuilder) {}
 
   public firstName: FormControl = new FormControl(
     "firstName",
@@ -58,20 +56,8 @@ export class FormComponent implements OnInit, AfterViewInit {
       { updateOn: "blur" }
     );
   }
-
-  public save(control: AbstractControl, data: CustomerDto): void {
-    // validates the model
-    /*
-    if (control.value.indexOf(" ") > -1) {
-      control.setErrors({
-        invalid: "The specified name is invalid."
-      });
-    }
-    */
-
+  public save(data: CustomerDto): void {
     // saves changes
-    if (!control.errors && !this.customerForm.errors) {
-      Object.assign(this.customer, this.customerForm.value);
-    }
+    Object.assign(this.customer, this.customerForm.value);
   }
 }

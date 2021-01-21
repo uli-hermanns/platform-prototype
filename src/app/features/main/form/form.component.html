@@ -1,4 +1,4 @@
-<form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event.control, $event.data)">
+<form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event.value)">
 	<p>
 		<mat-form-field appearance="standard">
 			<mat-label>First Name</mat-label>
