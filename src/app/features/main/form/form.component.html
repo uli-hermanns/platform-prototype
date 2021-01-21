@@ -7,10 +7,7 @@
 		<mat-error>
 			<span *ngIf="firstName.errors?.required">
           Please enter a first name.
-        </span>
-			<span *ngIf="firstName.errors?.invalid">
-          {{firstName.errors?.invalid}}
-        </span>
+       </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
@@ -19,10 +16,7 @@
 		<mat-error>
 			<span *ngIf="lastName.errors?.required">
           Please enter a last name.
-        </span>
-			<span *ngIf="lastName.errors?.invalid">
-          {{lastName.errors?.invalid}}
-        </span>
+       </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
@@ -30,14 +24,11 @@
 		<input matInput formControlName="city" />
 		<button mat-button matSuffix mat-stroked-button aria-label="search">
         <mat-icon>search</mat-icon>
-      </button>
+    </button>
 		<mat-error>
 			<span *ngIf="city.errors?.required">
           Please enter a city.
-        </span>
-			<span *ngIf="city.errors?.invalid">
-          {{city.errors?.invalid}}
-        </span>
+      </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-error>

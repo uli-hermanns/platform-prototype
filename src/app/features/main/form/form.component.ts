@@ -1,8 +1,5 @@
-import { ChangeDetectionStrategy } from "@angular/compiler/src/compiler_facade_interface";
 import {
   Component,
-  ElementRef,
-  HostListener,
   Input,
   AfterViewInit,
   OnInit,
@@ -12,11 +9,9 @@ import {
 import {
   FormGroup,
   FormControl,
-  Validators,
-  FormBuilder,
-  AbstractControl
-} from "@angular/forms";
+  Validators} from "@angular/forms";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
+import { FormAutosaveBuilder } from "../../../shared/forms/form-autosave-builder.service";
 import { FormAutosaveDirective } from "../../../shared/forms/form-autosave.directive";
 
 export type Focusable = { focus: () => void };
@@ -35,7 +30,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {}
+  constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {}
 
   public get dirty(): boolean {
     return this.customerForm.dirty;
@@ -58,14 +53,11 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.customerForm = this.fb.group(
-      {
-        city: this.city,
-        firstName: this.firstName,
-        lastName: this.lastName
-      },
-      { updateOn: "blur" }
-    );
+    this.customerForm = this.fb.group({
+      city: this.city,
+      firstName: this.firstName,
+      lastName: this.lastName
+    });
   }
   public save(data: CustomerDto): void {
     // saves changes

@@ -18,6 +18,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { FormAutosaveDirective } from "./forms/form-autosave.directive";
+import { FormAutosaveBuilder } from "./forms/form-autosave-builder.service";
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { FormAutosaveDirective } from "./forms/form-autosave.directive";
     DetailTabsComponent,
     DetailTabComponent,
     FormAutosaveDirective
-  ]
+  ],
+  providers: [FormAutosaveBuilder]
 })
 export class SharedModule {
   constructor(
