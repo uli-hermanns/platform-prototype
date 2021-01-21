@@ -52,6 +52,10 @@ export class FormAutosaveDirective implements OnInit, AfterContentInit {
           this.form.setErrors({
             invalid: eventArgs.error
           });
+          const element: HTMLElement | null = this.nativeElement.querySelector(
+            "input.ng-dirty, select.ng-dirty"
+          );
+          element?.focus();
         }
         else {
           this.form.markAsPristine();
