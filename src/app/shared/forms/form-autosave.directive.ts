@@ -53,7 +53,7 @@ export class FormAutosaveDirective implements OnInit, AfterContentInit {
             invalid: eventArgs.error
           });
           const element: HTMLElement | null = this.nativeElement.querySelector(
-            "input.ng-dirty, select.ng-dirty"
+            "input, select"
           );
           element?.focus();
         }
@@ -61,7 +61,7 @@ export class FormAutosaveDirective implements OnInit, AfterContentInit {
           this.form.markAsPristine();
           this.form.updateValueAndValidity();
         }
-      }
+      } 
       return data;
     });
   }
