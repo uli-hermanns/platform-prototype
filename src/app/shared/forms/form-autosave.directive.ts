@@ -30,7 +30,7 @@ export class FormAutosaveDirective implements OnInit {
     private el: ElementRef<HTMLFormElement>
   ) {
     this.logger = console;
-    this.logger.debug("Form Autosave Directive initialized.");
+    this.logger.info("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
@@ -39,11 +39,11 @@ export class FormAutosaveDirective implements OnInit {
     this.form.valueChanges.subscribe(data => {
       if (this.nativeElement.hasPointerCapture(1)) {
         this.nativeElement.releasePointerCapture(1);
-        this.logger.debug("Form Autosave capture released.");
+        this.logger.info("Form Autosave capture released.");
       }
 
       if (this.form.dirty && !this.form.invalid) {
-        this.logger.debug("Form Autosave saving.");
+        this.logger.info("Form Autosave saving.");
         this.formSave.emit({ value: data });
         this.form.markAsPristine();
       }
@@ -64,7 +64,7 @@ export class FormAutosaveDirective implements OnInit {
       setTimeout(() => {
         if (this.form.invalid) {
           this.nativeElement.setPointerCapture(1);
-          this.logger.debug("Form Autosave capture set.");
+          this.logger.info("Form Autosave capture set.");
 
           const element: HTMLElement | null = this.nativeElement.querySelector(
             "input.ng-invalid, select.ng-invalid"
