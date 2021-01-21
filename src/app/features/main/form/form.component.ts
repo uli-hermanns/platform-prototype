@@ -35,6 +35,8 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder) {}
 
+  public city: FormControl = new FormControl("city", Validators.required);
+
   public firstName: FormControl = new FormControl(
     "firstName",
     Validators.required
@@ -50,6 +52,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   public ngOnInit() {
     this.customerForm = this.fb.group(
       {
+        city: this.city,
         firstName: this.firstName,
         lastName: this.lastName
       },

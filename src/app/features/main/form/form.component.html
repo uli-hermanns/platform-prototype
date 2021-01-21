@@ -1,35 +1,43 @@
 <form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event.value)">
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>First Name</mat-label>
-			<input matInput [formControl]="firstName"/>
-			<mat-error>
-				<span *ngIf="firstName.errors?.required">
+	<mat-form-field appearance="standard">
+		<mat-label>First Name</mat-label>
+		<input matInput [formControl]="firstName"/>
+		<mat-error>
+			<span *ngIf="firstName.errors?.required">
           Please enter a first name.
         </span>
-				<span *ngIf="firstName.errors?.invalid">
+			<span *ngIf="firstName.errors?.invalid">
           {{firstName.errors?.invalid}}
         </span>
-			</mat-error>
-		</mat-form-field>
-	</p>
-	<p>
-		<mat-form-field appearance="standard">
-			<mat-label>Last Name</mat-label>
-			<input matInput formControlName="lastName" />
-			<button mat-button matSuffix mat-stroked-button aria-label="search">
-        <mat-icon>search</mat-icon>
-      </button>
-			<mat-error>
-				<span *ngIf="lastName.errors?.required">
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field appearance="standard">
+		<mat-label>Last Name</mat-label>
+		<input matInput formControlName="lastName" />
+		<mat-error>
+			<span *ngIf="lastName.errors?.required">
           Please enter a last name.
         </span>
-				<span *ngIf="lastName.errors?.invalid">
-          {{firstName.errors?.invalid}}
+			<span *ngIf="lastName.errors?.invalid">
+          {{lastName.errors?.invalid}}
         </span>
-			</mat-error>
-		</mat-form-field>
-	</p>
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field appearance="standard">
+		<mat-label>City</mat-label>
+		<input matInput formControlName="city" />
+		<button mat-button matSuffix mat-stroked-button aria-label="search">
+        <mat-icon>search</mat-icon>
+      </button>
+		<mat-error>
+			<span *ngIf="city.errors?.required">
+          Please enter a city.
+        </span>
+			<span *ngIf="city.errors?.invalid">
+          {{city.errors?.invalid}}
+        </span>
+		</mat-error>
+	</mat-form-field>
 	<mat-error>
 		<span *ngIf="customerForm.errors?.invalid">
       {{customerForm.errors?.invalid}}

@@ -10,7 +10,12 @@ export class MainComponent implements OnInit {
   readonly name: string;
   public customer: CustomerDto;
   constructor() {
-    this.customer = { key: "max@mustermann", firstName: "Max", lastName: "" };
+    this.customer = {
+      key: "max@mustermann",
+      firstName: "Max",
+      lastName: "",
+      city: "Aachen"
+    };
     this.name = "Platform Prototype based on Angular " + VERSION.major;
   }
 
