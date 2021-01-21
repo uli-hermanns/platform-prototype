@@ -3,6 +3,13 @@ form {
   flex-direction: column;
 }
 
+:host mat-icon {
+  padding-top: 4px;
+  align-self: flex-end;
+  font-size: 18px;
+  bottom: 0px;
+}
+
 mat-form-field {
   width: 100%;
 }

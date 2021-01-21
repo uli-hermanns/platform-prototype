@@ -35,6 +35,10 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormBuilder) {}
 
+  public get dirty(): boolean {
+    return this.customerForm.dirty;
+  }
+
   public city: FormControl = new FormControl("city", Validators.required);
 
   public firstName: FormControl = new FormControl(

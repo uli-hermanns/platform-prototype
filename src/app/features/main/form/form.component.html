@@ -1,3 +1,4 @@
+<mat-icon *ngIf="customerForm.dirty">grade</mat-icon>
 <form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event.value)">
 	<mat-form-field appearance="standard">
 		<mat-label>First Name</mat-label>

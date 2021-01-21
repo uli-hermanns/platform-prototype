@@ -36,6 +36,7 @@ export class FormAutosaveDirective implements OnInit {
   public ngOnInit() {
     this.nativeElement.autocomplete = "off";
     this.form.patchValue(this.formData);
+    this.form.markAsPristine();
     this.form.valueChanges.subscribe(data => {
       if (this.nativeElement.hasPointerCapture(1)) {
         this.nativeElement.releasePointerCapture(1);
