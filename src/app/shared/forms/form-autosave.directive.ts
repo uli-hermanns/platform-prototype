@@ -11,7 +11,7 @@ HostListener,
 import { AbstractControl, FormBuilder,  FormGroup, FormGroupDirective } from "@angular/forms";
 import { DomHelper } from "../../core/data/dom-helper";
 
-export type AutosaveEventArgs = { value: any }
+export type AutosaveEventArgs<T = any> = { value: T, error?: string }
 
 @Directive({
   selector: "[flexFormAutosave]"
@@ -46,9 +46,17 @@ export class FormAutosaveDirective implements OnInit, AfterContentInit {
 
       if (this.form.dirty && !this.form.invalid) {
         this.logger.info("Form Autosave saving.", data);
-        this.formSave.emit({ value: data });
-        this.form.markAsPristine();
-        this.form.updateValueAndValidity();
+        const eventArgs: AutosaveEventArgs = { value: data };
+        this.formSave.emit(eventArgs);
+        if (eventArgs.error) {
+          this.form.setErrors({
+            invalid: eventArgs.error
+          });
+        }
+        else {
+          this.form.markAsPristine();
+          this.form.updateValueAndValidity();
+        }
       }
       return data;
     });

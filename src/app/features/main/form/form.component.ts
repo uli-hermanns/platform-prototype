@@ -9,7 +9,10 @@ import {
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 import { FormAutosaveBuilder } from "../../../shared/forms/form-autosave-builder.service";
-import { FormAutosaveDirective } from "../../../shared/forms/form-autosave.directive";
+import {
+  AutosaveEventArgs,
+  FormAutosaveDirective
+} from "../../../shared/forms/form-autosave.directive";
 
 @Component({
   selector: "app-form",
@@ -54,12 +57,10 @@ export class FormComponent implements OnInit, AfterViewInit {
       lastName: this.lastName
     });
   }
-  public save(data: CustomerDto): void {
+  public save(eventArgs: AutosaveEventArgs<CustomerDto>): void {
     // performs the server validation
-    if (!["Aachen", "Bochum", "Köln"].includes(this.customer.city)) {
-      this.customerForm.setErrors({
-        invalid: `Unknown City: ${this.customer.city}`
-      });
+    if (!["Aachen", "Bochum", "Köln"].includes(eventArgs.value.city)) {
+      eventArgs.error = `Unknown City: ${eventArgs.value.city}`;
     } else {
       // saves changes
       Object.assign(this.customer, this.customerForm.value);
