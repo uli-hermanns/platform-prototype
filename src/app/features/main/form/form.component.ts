@@ -1,3 +1,4 @@
+import { ChangeDetectionStrategy } from "@angular/compiler/src/compiler_facade_interface";
 import {
   Component,
   ElementRef,
@@ -5,7 +6,8 @@ import {
   Input,
   AfterViewInit,
   OnInit,
-  ViewChild
+  ViewChild,
+  ChangeDetectorRef
 } from "@angular/core";
 import {
   FormGroup,
@@ -33,7 +35,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {}
 
   public get dirty(): boolean {
     return this.customerForm.dirty;
@@ -51,7 +53,9 @@ export class FormComponent implements OnInit, AfterViewInit {
     Validators.required
   );
 
-  public ngAfterViewInit() {}
+  public ngAfterViewInit() {
+    this.cd.detectChanges();
+  }
 
   public ngOnInit() {
     this.customerForm = this.fb.group(

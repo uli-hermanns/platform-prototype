@@ -1,4 +1,5 @@
-<mat-icon id="dirty" [style.visibility]="customerForm.dirty ? 'visible' : 'hidden'">grade</mat-icon>
+<mat-icon id="dirty" [style.visibility]="customerForm.invalid ? 'visible' : 'hidden'">grade
+</mat-icon>
 <form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event.value)">
 	<mat-form-field appearance="standard">
 		<mat-label>First Name</mat-label>
