@@ -45,9 +45,10 @@ export class FormAutosaveDirective implements OnInit, AfterContentInit {
       }
 
       if (this.form.dirty && !this.form.invalid) {
-        this.logger.info("Form Autosave saving.");
+        this.logger.info("Form Autosave saving.", data);
         this.formSave.emit({ value: data });
         this.form.markAsPristine();
+        this.form.updateValueAndValidity();
       }
       return data;
     });

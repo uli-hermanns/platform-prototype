@@ -6,15 +6,10 @@ import {
   ViewChild,
   ChangeDetectorRef
 } from "@angular/core";
-import {
-  FormGroup,
-  FormControl,
-  Validators} from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 import { FormAutosaveBuilder } from "../../../shared/forms/form-autosave-builder.service";
 import { FormAutosaveDirective } from "../../../shared/forms/form-autosave.directive";
-
-export type Focusable = { focus: () => void };
 
 @Component({
   selector: "app-form",
@@ -60,7 +55,14 @@ export class FormComponent implements OnInit, AfterViewInit {
     });
   }
   public save(data: CustomerDto): void {
-    // saves changes
-    Object.assign(this.customer, this.customerForm.value);
+    // performs the server validation
+    if (!["Aachen", "Bochum", "Köln"].includes(this.customer.city)) {
+      this.customerForm.setErrors({
+        invalid: `Unknown City: ${this.customer.city}`
+      });
+    } else {
+      // saves changes
+      Object.assign(this.customer, this.customerForm.value);
+    }
   }
 }
