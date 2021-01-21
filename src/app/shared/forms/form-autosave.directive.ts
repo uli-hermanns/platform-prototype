@@ -31,8 +31,10 @@ export class FormAutosaveDirective implements OnInit {
     this.nativeElement.autocomplete = "off";
     this.form.patchValue(this.formData);
     this.form.valueChanges.subscribe(data => {
-      this.nativeElement.releasePointerCapture(1);
-      console.info('Form Autosave capture released.');
+      if (this.nativeElement.hasPointerCapture(1)) {
+        this.nativeElement.releasePointerCapture(1);
+        console.info("Form Autosave capture released.");
+      }
       var control: AbstractControl = null;
       for (var key in this.form.controls) {
         control = this.form.controls[key];
@@ -41,6 +43,7 @@ export class FormAutosaveDirective implements OnInit {
         }
       }
       if (control !== null && control.valid) {
+        console.info("Form Autosave saving.");
         this.formSave.emit({ data: data, control: control });
       }
       return data;
@@ -50,12 +53,12 @@ export class FormAutosaveDirective implements OnInit {
   @HostListener("document:mousedown", ["$event"])
   private handleMouseDown(event: MouseEvent) {
     if (!DomHelper.isDescendant(this.el.nativeElement, <any>event.target)) {
-      if (this.form.dirty) {
+      if (this.form.dirty || this.form.invalid) {
         this.form.updateValueAndValidity();
         setTimeout(() => {
           if (this.form.invalid) {
             this.nativeElement.setPointerCapture(1);
-            console.info('Form Autosave capture set.');
+            console.info("Form Autosave capture set.");
           }
         });
       }
@@ -76,6 +79,7 @@ export class FormAutosaveDirective implements OnInit {
     this.form.updateValueAndValidity();
   }
 
+  /*
   @HostListener("focusout", ["$event.relatedTarget", "$event.target"])
   private handleFocusOut(related: HTMLElement | undefined, target: HTMLElement) {
       if (related?.classList.contains("flex-ignore")) {
@@ -90,5 +94,5 @@ export class FormAutosaveDirective implements OnInit {
         });
       }
   }
-  
+  */
 }
