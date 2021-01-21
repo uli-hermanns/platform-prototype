@@ -9,6 +9,7 @@ import {
 } from "@angular/core";
 import { AbstractControl, FormGroup, FormGroupDirective } from "@angular/forms";
 import { DomHelper } from "../../core/data/dom-helper";
+import * as log4js from "log4js";
 
 export type AutosaveEventArgs = { value: any }
 
@@ -16,6 +17,8 @@ export type AutosaveEventArgs = { value: any }
   selector: "[flexFormAutosave]"
 })
 export class FormAutosaveDirective implements OnInit {
+
+  private logger: log4js.Logger;
 
   @Input("flexFormAutosave")
   formData: Object | undefined;
@@ -27,7 +30,9 @@ export class FormAutosaveDirective implements OnInit {
     private formGroupDirective: FormGroupDirective,
     private el: ElementRef<HTMLFormElement>
   ) {
-    console.info("Form Autosave Directive initialized.");
+    this.logger = log4js.getLogger();
+    this.logger.level = "debug"; // default level is OFF - which means no logs at all.
+    this.logger.debug("Form Autosave Directive initialized.");
   }
 
   public ngOnInit() {
@@ -36,11 +41,11 @@ export class FormAutosaveDirective implements OnInit {
     this.form.valueChanges.subscribe(data => {
       if (this.nativeElement.hasPointerCapture(1)) {
         this.nativeElement.releasePointerCapture(1);
-        console.info("Form Autosave capture released.");
+        this.logger.debug("Form Autosave capture released.");
       }
 
       if (this.form.dirty && !this.form.invalid) {
-        console.info("Form Autosave saving.");
+        this.logger.debug("Form Autosave saving.");
         this.formSave.emit({ value: data });
         this.form.markAsPristine();
       }
@@ -61,7 +66,7 @@ export class FormAutosaveDirective implements OnInit {
       setTimeout(() => {
         if (this.form.invalid) {
           this.nativeElement.setPointerCapture(1);
-          console.info("Form Autosave capture set.");
+          this.logger.debug("Form Autosave capture set.");
 
           const element: HTMLElement | null = this.nativeElement.querySelector(
             "input.ng-invalid, select.ng-invalid"
