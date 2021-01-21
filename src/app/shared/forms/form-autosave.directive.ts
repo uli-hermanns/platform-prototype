@@ -28,8 +28,11 @@ export class FormAutosaveDirective implements OnInit {
   }
 
   public ngOnInit() {
+    this.nativeElement.autocomplete = "off";
     this.form.patchValue(this.formData);
     this.form.valueChanges.subscribe(data => {
+      this.nativeElement.releasePointerCapture(1);
+      console.info('Form Autosave capture released.');
       var control: AbstractControl = null;
       for (var key in this.form.controls) {
         control = this.form.controls[key];
@@ -47,17 +50,24 @@ export class FormAutosaveDirective implements OnInit {
   @HostListener("document:mousedown", ["$event"])
   private handleMouseDown(event: MouseEvent) {
     if (!DomHelper.isDescendant(this.el.nativeElement, <any>event.target)) {
-      this.form.updateValueAndValidity();
-      setTimeout(() => {
-        if (this.form.invalid) {
-          this.el.nativeElement.setPointerCapture(1);
-        }
-      });
+      if (this.form.dirty) {
+        this.form.updateValueAndValidity();
+        setTimeout(() => {
+          if (this.form.invalid) {
+            this.nativeElement.setPointerCapture(1);
+            console.info('Form Autosave capture set.');
+          }
+        });
+      }
     }
   }
 
   private get form(): FormGroup {
     return this.formGroupDirective.form;
+  }
+
+  private get nativeElement(): HTMLFormElement {
+    return this.el.nativeElement;
   }
 
   @HostListener("keyup.escape")
