@@ -38,14 +38,8 @@ export class FormAutosaveDirective implements OnInit {
         this.nativeElement.releasePointerCapture(1);
         console.info("Form Autosave capture released.");
       }
-      var control: AbstractControl = null;
-      for (var key in this.form.controls) {
-        control = this.form.controls[key];
-        if (control.dirty) {
-          break;
-        }
-      }
-      if (this.form.dirty) {
+
+      if (this.form.dirty && !this.form.invalid) {
         console.info("Form Autosave saving.");
         this.formSave.emit({ value: data });
         this.form.markAsPristine();

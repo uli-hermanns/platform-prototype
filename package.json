@@ -13,6 +13,7 @@
     "@angular/platform-browser": "^10.0.9",
     "@angular/platform-browser-dynamic": "^10.0.9",
     "@angular/router": "^10.0.9",
+    "log4js": "6.3.0",
     "rxjs": "^6.6.2",
     "tslib": "^2.0.1",
     "zone.js": "^0.10.3"
