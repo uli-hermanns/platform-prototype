@@ -1,13 +1,13 @@
-form {
+:host {
   display: flex;
   flex-direction: column;
 }
 
-:host mat-icon {
-  padding-top: 4px;
+#dirty {
+  color: red;
+  padding-top: 14px;
   align-self: flex-end;
   font-size: 18px;
-  bottom: 0px;
 }
 
 mat-form-field {
