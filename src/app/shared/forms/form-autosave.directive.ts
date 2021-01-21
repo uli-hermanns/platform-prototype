@@ -1,4 +1,5 @@
 import {
+AfterContentInit,
   Directive,
   ElementRef,
   EventEmitter,
@@ -15,7 +16,7 @@ export type AutosaveEventArgs = { value: any }
 @Directive({
   selector: "[flexFormAutosave]"
 })
-export class FormAutosaveDirective implements OnInit {
+export class FormAutosaveDirective implements OnInit, AfterContentInit {
 
   private logger: Console;
 
@@ -36,7 +37,7 @@ export class FormAutosaveDirective implements OnInit {
   public ngOnInit() {
     this.nativeElement.autocomplete = "off";
     this.form.patchValue(this.formData);
-    this.form.markAsPristine();
+    this.logger.info("Form Autosave bound.");
     this.form.valueChanges.subscribe(data => {
       if (this.nativeElement.hasPointerCapture(1)) {
         this.nativeElement.releasePointerCapture(1);
@@ -50,6 +51,9 @@ export class FormAutosaveDirective implements OnInit {
       }
       return data;
     });
+  }
+
+  public ngAfterContentInit() {
   }
 
   @HostListener("keyup.escape")
