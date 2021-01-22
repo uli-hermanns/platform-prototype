@@ -35,7 +35,14 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
-  constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {}
+  constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {
+    this.customerForm = this.fb.group({
+      city: this.city,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      user: this.user
+    });
+  }
 
   public get dirty(): boolean {
     return this.customerForm.dirty;
@@ -60,12 +67,6 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.customerForm = this.fb.group({
-      city: this.city,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      user: this.user
-    });
   }
 
   public bind(eventArgs: AutosaveEventArgs<CustomerModel>): void {
