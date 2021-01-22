@@ -1,6 +1,7 @@
 <mat-icon id="dirty" [style.visibility]="customerForm.invalid ? 'visible' : 'hidden'">grade
 </mat-icon>
-<form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event)">
+<form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event)"
+	(flexFormBind)="bind($event)">
 	<mat-form-field appearance="standard">
 		<mat-label>First Name</mat-label>
 		<input matInput [formControl]="firstName"/>
@@ -28,6 +29,15 @@
 		<mat-error>
 			<span *ngIf="city.errors?.required">
           Please enter a city.
+      </span>
+		</mat-error>
+	</mat-form-field>
+	<mat-form-field appearance="standard">
+		<mat-label>User</mat-label>
+		<input matInput formControlName="user" />
+		<mat-error>
+			<span *ngIf="city.errors?.required">
+          Please enter a user.
       </span>
 		</mat-error>
 	</mat-form-field>

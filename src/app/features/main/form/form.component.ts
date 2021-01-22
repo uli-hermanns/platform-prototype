@@ -14,6 +14,13 @@ import {
   FormAutosaveDirective
 } from "../../../shared/forms/form-autosave.directive";
 
+type CustomerModel = {
+  firstname: string;
+  lastName: string;
+  city: string;
+  user: string;
+};
+
 @Component({
   selector: "app-form",
   templateUrl: "./form.component.html",
@@ -46,6 +53,8 @@ export class FormComponent implements OnInit, AfterViewInit {
     Validators.required
   );
 
+  public user: FormControl = new FormControl("user", Validators.required);
+
   public ngAfterViewInit() {
     this.cd.detectChanges();
   }
@@ -54,16 +63,22 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.customerForm = this.fb.group({
       city: this.city,
       firstName: this.firstName,
-      lastName: this.lastName
+      lastName: this.lastName,
+      user: this.user
     });
   }
-  public save(eventArgs: AutosaveEventArgs<CustomerDto>): void {
+
+  public bind(eventArgs: AutosaveEventArgs<CustomerModel>): void {
+    Object.assign(eventArgs.data, { user: "Default" });
+  }
+
+  public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {
     // performs the server validation
-    if (!["Aachen", "Bochum", "Köln"].includes(eventArgs.value.city)) {
-      eventArgs.error = `Unknown City: ${eventArgs.value.city}`;
+    if (!["Aachen", "Bochum", "Köln"].includes(eventArgs.data.city)) {
+      eventArgs.error = `Unknown City: ${eventArgs.data.city}`;
     } else {
       // saves changes
-      Object.assign(this.customer, this.customerForm.value);
+      Object.assign(this.customer, eventArgs.data);
     }
   }
 }
