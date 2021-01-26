@@ -98,7 +98,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
         }
         else {
           setTimeout(() => {
-            // this.form.markAsPristine();
+            this.form.markAsPristine();
             this.form.updateValueAndValidity();
             this.form.markAsUntouched();
           })
@@ -111,7 +111,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   * Handles an Escape key press.
   */
   @HostListener("keyup.escape")
-  private handleEscape(): void {
+  private handleEscape(): void { 
     this.form.reset(this.formData);
     this.form.updateValueAndValidity();
   }
