@@ -100,7 +100,9 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
           setTimeout(() => {
             this.form.markAsPristine();
             this.form.updateValueAndValidity();
-            this.form.markAsUntouched();
+            if (DomHelper.isDescendant(this.nativeElement, document.activeElement)) { 
+              this.form.markAsUntouched();
+            }
           })
         }
       } 
@@ -114,14 +116,17 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   private handleEscape(): void { 
     this.form.reset(this.formData);
     this.form.updateValueAndValidity();
+    this.form.markAsTouched();
   }
-  
+
   /**
   * Handles a Mouse Down event.
   */
   @HostListener("document:mousedown", ["$event.target"])
   private handleMouseDown(target: HTMLElement): void {
-    if (!DomHelper.isDescendant(this.nativeElement, target)) {
+    if (DomHelper.isDescendant(this.nativeElement, target)) {
+      this.form.markAsTouched();
+    } else {
       this.form.updateValueAndValidity();
       setTimeout(() => {
         if (this.form.invalid) {
@@ -132,6 +137,8 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
             "input.ng-invalid, select.ng-invalid"
           );
           element?.focus();
+        } else {
+          this.form.markAsUntouched();
         }
       });
     }
