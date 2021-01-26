@@ -1,13 +1,12 @@
 <div id="status">
-	<span *ngIf="customerForm.pristine">C</span>
+	<span *ngIf="customerForm.pristine">P</span>
 	<span *ngIf="customerForm.dirty">D</span>
 	<span *ngIf="customerForm.invalid" style="color:red">I</span>
 	<span *ngIf="customerForm.valid" style="color:green">V</span>
 	<span *ngIf="customerForm.untouched">U</span>
 	<span *ngIf="customerForm.touched">T</span>
 </div>
-<form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event)"
-	(flexFormBind)="bind($event)">
+<form [formGroup]="customerForm" [flexFormAutosave]="model" (flexFormSave)="save($event)">
 	<mat-form-field appearance="standard">
 		<mat-label>First Name</mat-label>
 		<input matInput [formControl]="firstName"/>
@@ -39,11 +38,11 @@
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
-		<mat-label>User</mat-label>
-		<input matInput formControlName="user" />
+		<mat-label>Impeached</mat-label>
+		<input matInput formControlName="impeached" />
 		<mat-error>
-			<span *ngIf="city.errors?.required">
-          Please enter a user.
+			<span *ngIf="impeached.errors?.required">
+          Please enter a date of impeachment.
       </span>
 		</mat-error>
 	</mat-form-field>

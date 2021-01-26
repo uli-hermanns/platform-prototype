@@ -11,10 +11,10 @@ export class MainComponent implements OnInit {
   public customer: CustomerDto;
   constructor() {
     this.customer = {
-      key: "max@mustermann",
-      firstName: "Max",
-      lastName: "",
-      city: "Aachen"
+      key: "donald@trump",
+      firstName: "Donald",
+      lastName: "Trump",
+      city: "New York"
     };
     this.name = "Platform Prototype based on Angular " + VERSION.major;
   }

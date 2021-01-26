@@ -4,6 +4,7 @@ import {
   EventEmitter,
 HostListener,
   Input,
+OnChanges,
   OnInit,
   Output
 } from "@angular/core";
@@ -21,7 +22,7 @@ export type AutosaveEventArgs<T = any> = { data: T, error?: string }
 @Directive({
   selector: "[flexFormAutosave]"
 })
-export class FormAutosaveDirective implements OnInit {
+export class FormAutosaveDirective implements OnInit, OnChanges {
 
   /** Contains a logger instance */
   private logger: Console;
@@ -49,19 +50,25 @@ export class FormAutosaveDirective implements OnInit {
     private el: ElementRef<HTMLFormElement>
   ) {
     this.logger = console;
-    this.logger.info("Form Autosave Directive initialized.");
+    this.logger.info("Form Autosave Directive created.");
   }
 
   /**
-  * Initializes teh directive.
+  * Initializes the directive.
   */
   public ngOnInit() {
     this.nativeElement.autocomplete = "off";
-    this.formBind.emit({ data: this.formData });
+    this.form.valueChanges.subscribe(data => this.triggerAutosave(data));
+    this.logger.info("Form Autosave initialized.");
+  }
+
+  /**
+  * Initializes the directive.
+  */
+  public ngOnChanges() {
     this.form.patchValue(this.formData);  
     this.logger.info("Form Autosave bound.");
-    this.form.valueChanges.subscribe(data => this.triggerAutosave(data));
-  }
+  }  
 
   /**
   * Triggers the autosave.
@@ -93,6 +100,10 @@ export class FormAutosaveDirective implements OnInit {
         else {
           this.form.markAsPristine();
           this.form.updateValueAndValidity();
+          this.form.markAsUntouched();
+          for(var key in this.form.controls) {
+            this.form.controls[key].markAsUntouched();
+          }
         }
       } 
       return data;

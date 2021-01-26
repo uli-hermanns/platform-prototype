@@ -15,10 +15,10 @@ import {
 } from "../../../shared/forms/form-autosave.directive";
 
 type CustomerModel = {
-  firstname: string;
+  firstName: string;
   lastName: string;
   city: string;
-  user: string;
+  impeached: string;
 };
 
 @Component({
@@ -35,12 +35,14 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public customerForm: FormGroup;
 
+  public model: CustomerModel = null;
+
   constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {
     this.customerForm = this.fb.group({
       city: this.city,
       firstName: this.firstName,
       lastName: this.lastName,
-      user: this.user
+      impeached: this.impeached
     });
   }
 
@@ -60,22 +62,22 @@ export class FormComponent implements OnInit, AfterViewInit {
     Validators.required
   );
 
-  public user: FormControl = new FormControl("user", Validators.required);
+  public impeached: FormControl = new FormControl(
+    "impeached",
+    Validators.required
+  );
 
   public ngAfterViewInit() {
     this.cd.detectChanges();
   }
 
   public ngOnInit() {
-  }
-
-  public bind(eventArgs: AutosaveEventArgs<CustomerModel>): void {
-    Object.assign(eventArgs.data, { user: "Default" });
+    this.model = Object.assign({}, this.customer, { impeached: '' });
   }
 
   public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {
     // performs the server validation
-    if (!["Aachen", "Bochum", "Köln"].includes(eventArgs.data.city)) {
+    if (["bielefeld"].includes(eventArgs.data.city?.toLowerCase())) {
       eventArgs.error = `Unknown City: ${eventArgs.data.city}`;
     } else {
       // saves changes
