@@ -101,6 +101,8 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
             this.form.markAsPristine();
             this.form.updateValueAndValidity();
             if (DomHelper.isDescendant(this.nativeElement, document.activeElement)) { 
+              this.form.markAsTouched();
+            } else {
               this.form.markAsUntouched();
             }
           })
