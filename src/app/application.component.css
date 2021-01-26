@@ -12,4 +12,5 @@ mat-drawer-container {
 mat-drawer {
   padding: 10px;
   background-color: lightgray;
+  width: 300px;
 }

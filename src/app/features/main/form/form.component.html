@@ -1,5 +1,11 @@
-<mat-icon id="dirty" [style.visibility]="customerForm.invalid ? 'visible' : 'hidden'">grade
-</mat-icon>
+<div id="status">
+	<span *ngIf="customerForm.pristine">C</span>
+	<span *ngIf="customerForm.dirty">D</span>
+	<span *ngIf="customerForm.invalid" style="color:red">I</span>
+	<span *ngIf="customerForm.valid" style="color:green">V</span>
+	<span *ngIf="customerForm.untouched">U</span>
+	<span *ngIf="customerForm.touched">T</span>
+</div>
 <form [formGroup]="customerForm" [flexFormAutosave]="customer" (flexFormSave)="save($event)"
 	(flexFormBind)="bind($event)">
 	<mat-form-field appearance="standard">

@@ -3,11 +3,12 @@
   flex-direction: column;
 }
 
-#dirty {
-  color: red;
+#status {
   padding-top: 14px;
   align-self: flex-end;
   font-size: 18px;
+  font-weight: bold;
+  font-family: "Courier New", Courier, monospace;
 }
 
 mat-form-field {
