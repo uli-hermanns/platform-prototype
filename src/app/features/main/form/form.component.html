@@ -39,7 +39,7 @@
 	</mat-form-field>
 	<mat-form-field appearance="standard">
 		<mat-label>Impeached</mat-label>
-		<input matInput formControlName="impeached" />
+		<input matInput formControlName="impeached" type="date" />
 		<mat-error>
 			<span *ngIf="impeached.errors?.required">
           Please enter a date of impeachment.
