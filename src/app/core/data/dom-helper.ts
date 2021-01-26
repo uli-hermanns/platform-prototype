@@ -1,5 +1,5 @@
 export class DomHelper {
-  public static isDescendant(parent: HTMLElement, child: HTMLElement): boolean {
+  public static isDescendant(parent: Element, child: Element): boolean {
     var node = child.parentNode;
     while (node !== null) {
       if (node === parent) {
