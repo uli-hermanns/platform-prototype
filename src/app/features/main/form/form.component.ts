@@ -72,7 +72,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.model = Object.assign({}, this.customer, { impeached: '' });
+    this.model = Object.assign({}, this.customer, { impeached: null });
   }
 
   public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {
@@ -82,6 +82,7 @@ export class FormComponent implements OnInit, AfterViewInit {
     } else {
       // saves changes
       Object.assign(this.customer, eventArgs.data);
+      this.model = eventArgs.data;
     }
   }
 }

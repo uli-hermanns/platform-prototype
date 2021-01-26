@@ -93,17 +93,15 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
             const element: HTMLElement | null = this.nativeElement.querySelector(
               "input.ng-dirty, select.ng-dirty"
             );
-            console.info(element);
             element?.focus();
           })
         }
         else {
-          this.form.markAsPristine();
-          this.form.updateValueAndValidity();
-          this.form.markAsUntouched();
-          for(var key in this.form.controls) {
-            this.form.controls[key].markAsUntouched();
-          }
+          setTimeout(() => {
+            // this.form.markAsPristine();
+            this.form.updateValueAndValidity();
+            this.form.markAsUntouched();
+          })
         }
       } 
       return data;
