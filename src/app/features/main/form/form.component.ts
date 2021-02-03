@@ -18,7 +18,8 @@ type CustomerModel = {
   firstName: string;
   lastName: string;
   city: string;
-  impeached: string;
+  debt: number;
+  impeached: Date;
 };
 
 @Component({
@@ -42,6 +43,7 @@ export class FormComponent implements OnInit, AfterViewInit {
       city: this.city,
       firstName: this.firstName,
       lastName: this.lastName,
+      debt: this.debt,
       impeached: this.impeached
     });
   }
@@ -62,6 +64,10 @@ export class FormComponent implements OnInit, AfterViewInit {
     Validators.required
   );
 
+  public debt: FormControl = new FormControl(
+    "debt"
+  );
+
   public impeached: FormControl = new FormControl(
     "impeached",
     Validators.required
@@ -72,7 +78,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.model = Object.assign({}, this.customer, { impeached: null });
+    this.model = Object.assign({}, this.customer, { debt: 1000, impeached: new Date() });
   }
 
   public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {

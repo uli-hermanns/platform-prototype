@@ -28,7 +28,7 @@
 	<mat-form-field appearance="standard">
 		<mat-label>City</mat-label>
 		<input matInput formControlName="city" />
-		<button mat-button matSuffix mat-stroked-button aria-label="search">
+		<button mat-icon-button matSuffix aria-label="search">
         <mat-icon>search</mat-icon>
     </button>
 		<mat-error>
@@ -38,17 +38,21 @@
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
-		<mat-label>Impeached</mat-label>
-		<input matInput formControlName="impeached" type="date" />
-		<mat-error>
-			<span *ngIf="impeached.errors?.required">
+		<mat-label>Schuldenstand</mat-label>
+		<input matInput formControlName="debt" type="number" />
+	</mat-form-field>
+		<mat-form-field appearance="standard">
+			<mat-label>Impeached</mat-label>
+			<input matInput formControlName="impeached" type="date" />
+			<mat-error>
+				<span *ngIf="impeached.errors?.required">
           Please enter a date of impeachment.
       </span>
-		</mat-error>
-	</mat-form-field>
-	<mat-error>
-		<span *ngIf="customerForm.errors?.invalid">
+			</mat-error>
+		</mat-form-field>
+		<mat-error>
+			<span *ngIf="customerForm.errors?.invalid">
       {{customerForm.errors?.invalid}}
     </span>
-	</mat-error>
+		</mat-error>
 </form>

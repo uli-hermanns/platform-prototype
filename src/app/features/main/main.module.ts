@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { MainComponent } from "./main.component";
+import { MatButtonModule } from "@angular/material/button";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
@@ -15,6 +16,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatGridListModule,
     MatFormFieldModule,
     MatIconModule,
+    MatButtonModule,
     MatInputModule,
     SharedModule,
     ReactiveFormsModule
