@@ -43,7 +43,9 @@
 	</mat-form-field>
 		<mat-form-field appearance="standard">
 			<mat-label>Impeached</mat-label>
-			<input matInput [formControl]="form.impeached" type="date" />
+			<input matInput [formControl]="form.impeached" [matDatepicker]="picker" />
+			<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+			<mat-datepicker #picker></mat-datepicker>
 			<mat-error>
 				<span *ngIf="form.impeached.errors?.required">
           Please enter a date of impeachment.
