@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 import {
   Component,
   Input,
@@ -13,6 +14,12 @@ import {
   AutosaveEventArgs,
   FormAutosaveDirective
 } from "../../../shared/forms/form-autosave.directive";
+
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+registerLocaleData(localeDe);
+
+type ReactiveForm = { [key: string]: FormControl }
 
 type CustomerModel = {
   firstName: string;
@@ -38,7 +45,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public model: CustomerModel = null;
 
-  public form = {
+  public form: ReactiveForm = {
     city: new FormControl(null, Validators.required),
     firstName: new FormControl(null, Validators.required),
     lastName: new FormControl(null, Validators.required),
@@ -50,16 +57,16 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.customerForm = this.fb.group(this.form);
   }
 
-  public get dirty(): boolean {
-    return this.customerForm.dirty;
-  }
-
    public ngAfterViewInit() {
     this.cd.detectChanges();
   }
 
   public ngOnInit() {
-    this.model = {...this.customer, debt: 1000, impeached: new Date().toLocaleDateString()};
+    this.model = {...this.customer, debt: 1000, impeached: formatDate(new Date(), 'shortDate', 'de')};
+  }
+
+  public get dirty(): boolean {
+    return this.customerForm.dirty;
   }
 
   public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {
