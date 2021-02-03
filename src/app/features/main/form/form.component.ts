@@ -19,7 +19,7 @@ type CustomerModel = {
   lastName: string;
   city: string;
   debt: number;
-  impeached: Date;
+  impeached: string;
 };
 
 @Component({
@@ -38,47 +38,28 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   public model: CustomerModel = null;
 
+  public form = {
+    city: new FormControl(null, Validators.required),
+    firstName: new FormControl(null, Validators.required),
+    lastName: new FormControl(null, Validators.required),
+    debt: new FormControl(),
+    impeached: new FormControl(null, Validators.required),
+  }
+
   constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {
-    this.customerForm = this.fb.group({
-      city: this.city,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      debt: this.debt,
-      impeached: this.impeached
-    });
+    this.customerForm = this.fb.group(this.form);
   }
 
   public get dirty(): boolean {
     return this.customerForm.dirty;
   }
 
-  public city: FormControl = new FormControl("city", Validators.required);
-
-  public firstName: FormControl = new FormControl(
-    "firstName",
-    Validators.required
-  );
-
-  public lastName: FormControl = new FormControl(
-    "lastName",
-    Validators.required
-  );
-
-  public debt: FormControl = new FormControl(
-    "debt"
-  );
-
-  public impeached: FormControl = new FormControl(
-    "impeached",
-    Validators.required
-  );
-
-  public ngAfterViewInit() {
+   public ngAfterViewInit() {
     this.cd.detectChanges();
   }
 
   public ngOnInit() {
-    this.model = Object.assign({}, this.customer, { debt: 1000, impeached: new Date() });
+    this.model = {...this.customer, debt: 1000, impeached: new Date().toLocaleDateString()};
   }
 
   public save(eventArgs: AutosaveEventArgs<CustomerModel>): void {

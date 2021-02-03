@@ -67,7 +67,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   */
   public ngOnChanges() {
     this.form.patchValue(this.formData);  
-    this.logger.info("Form Autosave bound.");
+    this.logger.info("Form Autosave bound.", this.formData);
   }  
 
   /**

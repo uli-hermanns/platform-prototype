@@ -9,43 +9,43 @@
 <form [formGroup]="customerForm" [flexFormAutosave]="model" (flexFormSave)="save($event)">
 	<mat-form-field appearance="standard">
 		<mat-label>First Name</mat-label>
-		<input matInput [formControl]="firstName"/>
+		<input matInput [formControl]="form.firstName"/>
 		<mat-error>
-			<span *ngIf="firstName.errors?.required">
+			<span *ngIf="form.firstName.errors?.required">
           Please enter a first name.
        </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
 		<mat-label>Last Name</mat-label>
-		<input matInput formControlName="lastName" />
+		<input matInput [formControl]="form.lastName" />
 		<mat-error>
-			<span *ngIf="lastName.errors?.required">
+			<span *ngIf="form.lastName.errors?.required">
           Please enter a last name.
        </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
 		<mat-label>City</mat-label>
-		<input matInput formControlName="city" />
+		<input matInput [formControl]="form.city" />
 		<button mat-icon-button matSuffix aria-label="search">
         <mat-icon>search</mat-icon>
     </button>
 		<mat-error>
-			<span *ngIf="city.errors?.required">
+			<span *ngIf="form.city.errors?.required">
           Please enter a city.
       </span>
 		</mat-error>
 	</mat-form-field>
 	<mat-form-field appearance="standard">
 		<mat-label>Schuldenstand</mat-label>
-		<input matInput formControlName="debt" type="number" />
+		<input matInput [formControl]="form.debt" type="number" />
 	</mat-form-field>
 		<mat-form-field appearance="standard">
 			<mat-label>Impeached</mat-label>
-			<input matInput formControlName="impeached" type="date" />
+			<input matInput [formControl]="form.impeached" type="date" />
 			<mat-error>
-				<span *ngIf="impeached.errors?.required">
+				<span *ngIf="form.impeached.errors?.required">
           Please enter a date of impeachment.
       </span>
 			</mat-error>
