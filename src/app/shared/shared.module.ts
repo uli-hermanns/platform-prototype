@@ -15,6 +15,7 @@ import { DetailTabsComponent } from "./detail-tabs/detail-tabs.component";
 import { MatTabsModule } from "@angular/material/tabs";
 import { DetailTabComponent } from "./detail-tabs/detail-tab/detail-tab.component";
 import { MatMenuModule } from "@angular/material/menu";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { FormAutosaveDirective } from "./forms/form-autosave.directive";
@@ -28,7 +29,8 @@ import { FormAutosaveBuilder } from "./forms/form-autosave-builder.service";
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMomentDateModule
   ],
   declarations: [
     TitlebarComponent,
