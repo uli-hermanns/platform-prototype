@@ -1,7 +1,13 @@
-import { NgModule, Optional, SkipSelf } from "@angular/core";
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf
+} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ApplicationModule } from "../application.module";
 import { DtoResolver } from "./data/dto-resolver.service";
+import { MAT_DATE_LOCALE } from "@angular/material/core";
 
 @NgModule({
   imports: [CommonModule],
@@ -9,7 +15,7 @@ import { DtoResolver } from "./data/dto-resolver.service";
   providers: [DtoResolver]
 })
 export class CoreModule {
-  constructor(
+  public constructor(
     @Optional()
     @SkipSelf()
     parentModule: CoreModule
@@ -21,5 +27,11 @@ export class CoreModule {
         } only.`
       );
     }
+  }
+  public static for(locale: string): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [{ provide: MAT_DATE_LOCALE, useValue: locale }]
+    };
   }
 }
