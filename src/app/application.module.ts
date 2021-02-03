@@ -15,7 +15,7 @@ import { CoreModule } from "./core/core.module";
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    CoreModule.for("de-DE"),
+    CoreModule.for("en-EN"),
     SharedModule,
     MainModule,
     MatSidenavModule,

@@ -15,10 +15,6 @@ import {
   FormAutosaveDirective
 } from "../../../shared/forms/form-autosave.directive";
 
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-registerLocaleData(localeDe);
-
 type ReactiveForm = { [key: string]: FormControl }
 
 type CustomerModel = {
@@ -39,7 +35,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   public customer: CustomerDto = null;
 
   @ViewChild(FormAutosaveDirective)
-  private autoSaveForm: FormAutosaveDirective;
+  private autoSaveForm: FormAutosaveDirective<CustomerModel>;
 
   public customerForm: FormGroup;
 

@@ -22,7 +22,7 @@ export type AutosaveEventArgs<T = any> = { data: T, error?: string }
 @Directive({
   selector: "[flexFormAutosave]"
 })
-export class FormAutosaveDirective implements OnInit, OnChanges {
+export class FormAutosaveDirective<TModel> implements OnInit, OnChanges {
 
   /** Contains a logger instance */
   private logger: Console;
@@ -33,11 +33,11 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
 
   /** Provides a bind event */
   @Output("flexFormBind")
-  formBind = new EventEmitter<AutosaveEventArgs>();
+  formBind = new EventEmitter<AutosaveEventArgs<TModel>>();
 
   /** Provides an autosave event */
   @Output("flexFormSave")
-  formSave = new EventEmitter<AutosaveEventArgs>();
+  formSave = new EventEmitter<AutosaveEventArgs<TModel>>();
 
   /**
   * Creates an instance of the Autosave Diretive
@@ -50,7 +50,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
     private el: ElementRef<HTMLFormElement>
   ) {
     this.logger = console;
-    this.logger.info("Form Autosave Directive created.");
+    this.logger.info(`${FormAutosaveDirective.name} created.`);
   }
 
   /**
@@ -59,7 +59,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   public ngOnInit() {
     this.nativeElement.autocomplete = "off";
     this.form.valueChanges.subscribe(data => this.triggerAutosave(data));
-    this.logger.info("Form Autosave initialized.");
+    this.logger.info(`${FormAutosaveDirective.name} initialized.`);
   }
 
   /**
@@ -67,7 +67,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   */
   public ngOnChanges() {
     this.form.patchValue(this.formData);  
-    this.logger.info("Form Autosave bound.", this.formData);
+    this.logger.info(`${FormAutosaveDirective.name} bound.`, this.formData);
   }  
 
   /**
@@ -78,11 +78,11 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
   private triggerAutosave(data: Object): Object {
       if (this.nativeElement.hasPointerCapture(1)) {
         this.nativeElement.releasePointerCapture(1);
-        this.logger.info("Form Autosave capture released.");
+        this.logger.info(`${FormAutosaveDirective.name} capture released.`);
       }
 
       if (this.form.dirty && !this.form.invalid) {
-        this.logger.info("Form Autosave saving.", data);
+        this.logger.info(`${FormAutosaveDirective.name} saving.`, data);
         const eventArgs: AutosaveEventArgs = { data: data };
         this.formSave.emit(eventArgs);
         if (eventArgs.error) {
@@ -133,7 +133,7 @@ export class FormAutosaveDirective implements OnInit, OnChanges {
       setTimeout(() => {
         if (this.form.invalid) {
           this.nativeElement.setPointerCapture(1);
-          this.logger.info("Form Autosave capture set.");
+          this.logger.info(`${FormAutosaveDirective.name} capture set.`);
 
           const element: HTMLElement | null = this.nativeElement.querySelector(
             "input.ng-invalid, select.ng-invalid"

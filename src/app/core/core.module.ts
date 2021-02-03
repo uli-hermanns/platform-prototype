@@ -9,6 +9,10 @@ import { ApplicationModule } from "../application.module";
 import { DtoResolver } from "./data/dto-resolver.service";
 import { MAT_DATE_LOCALE } from "@angular/material/core";
 
+import { registerLocaleData } from "@angular/common";
+import localeDe from "@angular/common/locales/de";
+registerLocaleData(localeDe);
+
 @NgModule({
   imports: [CommonModule],
   declarations: [],
@@ -28,7 +32,10 @@ export class CoreModule {
       );
     }
   }
-  public static for(locale: string): ModuleWithProviders<CoreModule> {
+  public static for(
+    locale: "de-DE" | "en-EN"
+  ): ModuleWithProviders<CoreModule> {
+    console.info(`${CoreModule.name} using locale ${locale}`);
     return {
       ngModule: CoreModule,
       providers: [{ provide: MAT_DATE_LOCALE, useValue: locale }]
