@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
-import { MatSidenavModule } from "@angular/material/sidenav";
 
 import { ApplicationComponent } from "./application.component";
 import { ApplicationRoutingModule } from "./application-routing.module";
@@ -18,7 +17,6 @@ import { CoreModule } from "./core/core.module";
     CoreModule.for("en-EN"),
     SharedModule,
     MainModule,
-    MatSidenavModule,
     ApplicationRoutingModule
   ],
   declarations: [ApplicationComponent],

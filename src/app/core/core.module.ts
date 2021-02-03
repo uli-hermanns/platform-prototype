@@ -6,6 +6,7 @@ import {
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { ApplicationModule } from "../application.module";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 import { DtoResolver } from "./data/dto-resolver.service";
 import { MAT_DATE_LOCALE } from "@angular/material/core";
 
@@ -14,7 +15,7 @@ import localeDe from "@angular/common/locales/de";
 registerLocaleData(localeDe);
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MatMomentDateModule],
   declarations: [],
   providers: [DtoResolver]
 })

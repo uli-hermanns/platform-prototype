@@ -8,6 +8,7 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { DateAdapter } from "@angular/material/core";
 import { CustomerDto } from "../../../core/data/customer-dto.model";
 import { FormAutosaveBuilder } from "../../../shared/forms/form-autosave-builder.service";
 import {
@@ -49,8 +50,9 @@ export class FormComponent implements OnInit, AfterViewInit {
     impeached: new FormControl(null, Validators.required),
   }
 
-  constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef) {
+  constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef, private adapter: DateAdapter<Date>) {
     this.customerForm = this.fb.group(this.form);
+    adapter.setLocale("en");
   }
 
    public ngAfterViewInit() {
