@@ -22,7 +22,7 @@ import { MAT_DATE_LOCALE } from "@angular/material/core";
     MainModule,
     ApplicationRoutingModule
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: "en-EN" }],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: "de-DE" }],
   declarations: [ApplicationComponent],
   bootstrap: [ApplicationComponent]
 })

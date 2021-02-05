@@ -4,12 +4,16 @@ import {
   EventEmitter,
 HostListener,
   Input,
+NgZone,
 OnChanges,
-  OnInit,
-  Output
+OnDestroy,
+    OnInit,
+  Output,
+ViewChild
 } from "@angular/core";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
 import { DomHelper } from "../../core/data/dom-helper";
+import {FocusMonitor, FocusOrigin} from '@angular/cdk/a11y';
 
 /** 
  * Defines an autosave event args type.
@@ -22,7 +26,7 @@ export type AutosaveEventArgs<T = any> = { data: T, error?: string }
 @Directive({
   selector: "[flexFormAutosave]"
 })
-export class FormAutosaveDirective<TModel> implements OnInit, OnChanges {
+export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChanges {
 
   /** Contains a logger instance */
   private logger: Console;
@@ -46,12 +50,28 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnChanges {
   * @param el The form element.
   */
   constructor(
+    private focusMonitor: FocusMonitor,
     private formGroupDirective: FormGroupDirective,
-    private el: ElementRef<HTMLFormElement>
+    private ngZone: NgZone,
+    private el: ElementRef<HTMLFormElement>,
+    private subtree: ElementRef<HTMLElement>
   ) {
     this.logger = console;
     this.logger.info(`${FormAutosaveDirective.name} created.`);
+    this.focusMonitor.monitor(this.el)
+        .subscribe(origin => this.ngZone.run(() => {
+          console.info(`${FormAutosaveDirective.name} focus form by `, origin);
+        }));
+    this.focusMonitor.monitor(this.subtree, true)
+        .subscribe(origin => this.ngZone.run(() => {
+          console.info(`${FormAutosaveDirective.name} focus form child by `, origin);
+        }));    
   }
+
+  ngOnDestroy() {
+    this.focusMonitor.stopMonitoring(this.el);
+    this.focusMonitor.stopMonitoring(this.subtree);
+  }    
 
   /**
   * Initializes the directive.

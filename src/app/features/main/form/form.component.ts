@@ -52,7 +52,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef, private adapter: DateAdapter<Date>) {
     this.customerForm = this.fb.group(this.form);
-    adapter.setLocale("de-DE");
+    // adapter.setLocale("de-DE");
   }
 
    public ngAfterViewInit() {
@@ -60,7 +60,7 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit() {
-    this.model = {...this.customer, debt: 1000, impeached: formatDate(new Date(), 'shortDate', 'de')};
+    this.model = {...this.customer, debt: 1000, impeached: formatDate(new Date(), 'shortDate', 'en')};
   }
 
   public get dirty(): boolean {
