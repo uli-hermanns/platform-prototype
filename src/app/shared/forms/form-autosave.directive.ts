@@ -60,11 +60,11 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
     this.logger.info(`${FormAutosaveDirective.name} created.`);
     this.focusMonitor.monitor(this.el)
         .subscribe(origin => this.ngZone.run(() => {
-          console.info(`${FormAutosaveDirective.name} focus form by `, origin);
+          console.info(`${FormAutosaveDirective.name} ${origin ? "focus form by " + origin : "blur form"}`);
         }));
     this.focusMonitor.monitor(this.subtree, true)
         .subscribe(origin => this.ngZone.run(() => {
-          console.info(`${FormAutosaveDirective.name} focus form child by `, origin);
+          console.info(`${FormAutosaveDirective.name} ${origin ? "focus child by " + origin : "blur child"}`);
         }));    
   }
 
@@ -146,7 +146,7 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
   */
   @HostListener("document:mousedown", ["$event.target"])
   private handleMouseDown(target: HTMLElement): void {
-    if (DomHelper.isDescendant(this.nativeElement, target)) {
+    if (DomHelper.isDescendant(this.nativeElement, target) || (target.querySelector(".cdk-overlay-container") !== null)) {
       this.form.markAsTouched();
     } else {
       this.form.updateValueAndValidity();
