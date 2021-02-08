@@ -14,6 +14,7 @@ ViewChild
 import { FormGroup, FormGroupDirective } from "@angular/forms";
 import { DomHelper } from "../../core/data/dom-helper";
 import {FocusMonitor, FocusOrigin} from '@angular/cdk/a11y';
+import { OverlayContainer, OverlayOutsideClickDispatcher } from "@angular/cdk/overlay";
 
 /** 
  * Defines an autosave event args type.
@@ -50,6 +51,7 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
   * @param el The form element.
   */
   constructor(
+    private overlayContainer: OverlayContainer,
     private focusMonitor: FocusMonitor,
     private formGroupDirective: FormGroupDirective,
     private ngZone: NgZone,
@@ -146,7 +148,7 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
   */
   @HostListener("document:mousedown", ["$event.target"])
   private handleMouseDown(target: HTMLElement): void {
-    if (DomHelper.isDescendant(this.nativeElement, target) || (target.querySelector(".cdk-overlay-container") !== null)) {
+    if (DomHelper.isDescendant(this.nativeElement, target) || DomHelper.isDescendant(this.overlayContainer.getContainerElement(), target)) {
       this.form.markAsTouched();
     } else {
       this.form.updateValueAndValidity();
