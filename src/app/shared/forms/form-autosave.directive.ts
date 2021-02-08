@@ -65,6 +65,10 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
         }));
     this.focusMonitor.monitor(this.subtree, true)
         .subscribe(origin => this.ngZone.run(() => {
+          if (this.form.invalid && !origin) {
+            // this.nativeElement.setPointerCapture(1);
+            // this.restoreFocus("invalid");
+          }
           console.info(`${FormAutosaveDirective.name} ${origin ? "focus child by " + origin : "blur child"}`);
         }));    
   }
@@ -111,10 +115,7 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
             invalid: eventArgs.error
           });
           setTimeout(() => {
-            const element: HTMLElement | null = this.nativeElement.querySelector(
-              "input.ng-dirty, select.ng-dirty"
-            );
-            element?.focus();
+            this.restoreFocus("dirty");
           })
         }
         else {
@@ -155,16 +156,23 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
         if (this.form.invalid) {
           this.nativeElement.setPointerCapture(1);
           this.logger.info(`${FormAutosaveDirective.name} capture set.`);
-
-          const element: HTMLElement | null = this.nativeElement.querySelector(
-            "input.ng-invalid, select.ng-invalid"
-          );
-          element?.focus();
+          this.restoreFocus("invalid");
         } else {
           this.form.markAsUntouched();
         }
       });
     }
+  }
+
+  /**
+  * Restores the focus.
+  * @param status Sets the focus to a field with the specified status.
+  */
+  private restoreFocus(status: "dirty" | "invalid" | "valid") {
+    const element: HTMLElement | null = this.nativeElement.querySelector(
+      `input.ng-${status}, select.ng-${status}`
+    );
+    element?.focus();
   }
 
   /**
