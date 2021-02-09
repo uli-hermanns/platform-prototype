@@ -70,21 +70,12 @@ export class FormAutosaveDirective<TModel>
       defer: false
     });
     this.focusTrap.enabled = false;
-    this.focusMonitor.monitor(this.el).subscribe(origin =>
-      this.ngZone.run(() => {
-        console.info(
-          `${FormAutosaveDirective.name} ${
-            origin ? "focus form by " + origin : "blur form"
-          }`
-        );
-      })
-    );
-    this.focusMonitor.monitor(this.subtree, true).subscribe(origin =>
+    this.focusMonitor.monitor(this.el, true).subscribe(origin =>
       this.ngZone.run(() => {
         this.focusTrap.enabled = this.form.invalid;
         console.info(
           `${FormAutosaveDirective.name} ${
-            origin ? "focus child by " + origin : "blur child"
+            origin ? "focus child by " + origin : "blur"
           }`
         );
       })
@@ -182,7 +173,7 @@ export class FormAutosaveDirective<TModel>
   @HostListener("document:mousedown", ["$event.target"])
   private handleMouseDown(target: HTMLElement): void {
     if (this.isChild(target)) {
-      // sets teh form to be touched
+      // sets the form to be touched
       this.form.markAsTouched();
     } else {
       // checks the validity
