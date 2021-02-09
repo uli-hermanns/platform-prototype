@@ -10,7 +10,6 @@ import { FormComponent } from "./form/form.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatDatepickerModule } from "@angular/material/datepicker";
-import {A11yModule} from '@angular/cdk/a11y';
 
 @NgModule({
   imports: [
@@ -22,8 +21,7 @@ import {A11yModule} from '@angular/cdk/a11y';
     MatButtonModule,
     MatInputModule,
     SharedModule,
-    ReactiveFormsModule,
-    A11yModule
+    ReactiveFormsModule
   ],
   declarations: [MainComponent, FormComponent],
   exports: [MainComponent, FormComponent]
