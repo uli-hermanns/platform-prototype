@@ -8,12 +8,10 @@ NgZone,
 OnChanges,
 OnDestroy,
     OnInit,
-  Output,
-ViewChild
-} from "@angular/core";
+  Output} from "@angular/core";
 import { FormGroup, FormGroupDirective } from "@angular/forms";
-import {FocusMonitor, FocusOrigin} from '@angular/cdk/a11y';
-import { OverlayContainer, OverlayOutsideClickDispatcher } from "@angular/cdk/overlay";
+import {FocusMonitor} from '@angular/cdk/a11y';
+import { OverlayContainer } from "@angular/cdk/overlay";
 
 /** 
  * Defines an autosave event args type.
@@ -172,7 +170,9 @@ export class FormAutosaveDirective<TModel> implements OnInit, OnDestroy, OnChang
     const element: HTMLElement | null = this.nativeElement.querySelector(
       `input.ng-${status}, select.ng-${status}`
     );
-    element?.focus();
+    if (element) {
+      this.focusMonitor.focusVia(element, "program")
+    }
   }
 
   /**
