@@ -175,7 +175,7 @@ export class FormAutosaveDirective<TModel>
    * @param event The mouse event.
    */
   @HostListener("document:pointerdown", ["$event"])
-  private handleMouseDown(event: PointerEvent): void {
+  private handlePointerDown(event: PointerEvent): void {
     // gets the target through the `composedPath` if possible to account for shadow DOM
     const target = event.composedPath ? event.composedPath()[0] : event.target;
     if (this.isChild(target)) {
