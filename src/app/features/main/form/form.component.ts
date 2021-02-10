@@ -16,6 +16,13 @@ import {
   FormAutosaveDirective
 } from "../../../shared/forms/form-autosave.directive";
 
+function pick<
+  T extends { [K in keyof T]: string | number | symbol },
+  K extends keyof T
+>(value: T, selector: K): Record<T[K], T> {
+  return { ...{}, [selector] : value[selector] } as Record<T[K], T>;
+}
+
 type ReactiveForm = { [key: string]: FormControl }
 
 type CustomerModel = {
@@ -54,9 +61,14 @@ export class FormComponent implements OnInit, AfterViewInit {
     this.customerForm = this.fb.group(this.form);
     // adapter.setLocale("de-DE");
   }
+  
 
    public ngAfterViewInit() {
     this.cd.detectChanges();
+    const result = pick(this.customer, 'key');
+    console.info(result);
+    const keys = Object.keys(result);
+    console.info(keys);
   }
 
   public ngOnInit() {

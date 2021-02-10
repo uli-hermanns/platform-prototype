@@ -101,7 +101,13 @@ export class FormAutosaveDirective<TModel>
    * Initializes the directive.
    */
   public ngOnChanges() {
-    this.form.patchValue(this.formData);
+    if (this.formData === null) {
+      this.form.reset();
+      this.form.disable();
+    } else {
+      this.form.enable();
+      this.form.patchValue(this.formData);
+    }
     this.logger.info(`${FormAutosaveDirective.name} bound.`, this.formData);
   }
 
