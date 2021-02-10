@@ -117,11 +117,6 @@ export class FormAutosaveDirective<TModel>
    * @param data The data to save.
    */
   private triggerAutosave(data: Object): Object {
-    if (this.nativeElement.hasPointerCapture(1)) {
-      this.nativeElement.releasePointerCapture(1);
-      this.logger.info(`${FormAutosaveDirective.name} capture released.`);
-    }
-
     if (this.form.dirty && !this.form.invalid) {
       this.logger.info(`${FormAutosaveDirective.name} saving.`, data);
       const eventArgs: AutosaveEventArgs = { data: data };
@@ -159,25 +154,30 @@ export class FormAutosaveDirective<TModel>
   }
 
   /**
-   * Checks, whether the specified element is a child element.
+   * Checks, whether the specified node is a child node.
    *
-   * @param element The element to check.
-   * @returns true, if the element is a child element of the form.
+   * @param node The node to check.
+   * @returns true, if the node is a child element of the form.
    */
-  private isChild(element: HTMLElement): boolean {
+  private isChild(node: Object): boolean {
+    if (!(node instanceof Node)) {
+      return false;
+    }
     return (
-      this.nativeElement.contains(element) ||
-      this.overlayContainer.getContainerElement().contains(element)
+      this.nativeElement.contains(node) ||
+      this.overlayContainer.getContainerElement().contains(node)
     );
   }
 
   /**
    * Handles a mouse down event.
    *
-   * @param target The target element.
+   * @param event The mouse event.
    */
-  @HostListener("document:mousedown", ["$event.target"])
-  private handleMouseDown(target: HTMLElement): void {
+  @HostListener("document:pointerdown", ["$event"])
+  private handleMouseDown(event: PointerEvent): void {
+    // gets the target through the `composedPath` if possible to account for shadow DOM
+    const target = event.composedPath ? event.composedPath()[0] : event.target;
     if (this.isChild(target)) {
       // sets the form to be touched
       this.form.markAsTouched();
@@ -186,8 +186,11 @@ export class FormAutosaveDirective<TModel>
       this.form.updateValueAndValidity();
       setTimeout(() => {
         if (this.form.invalid) {
-          this.nativeElement.setPointerCapture(1);
-          this.logger.info(`${FormAutosaveDirective.name} capture set.`);
+          this.logger.info(
+            `${FormAutosaveDirective.name} capture set.`,
+            event.pointerId
+          );
+          this.nativeElement.setPointerCapture(event.pointerId);
           this.restoreFocus("invalid");
         } else {
           this.form.markAsUntouched();
