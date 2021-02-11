@@ -173,6 +173,7 @@ export class FormAutosaveDirective<TModel>
    * @param event The mouse event.
    */
   @HostListener("document:pointerup", ["$event"])
+  @HostListener("document:pointercancel", ["$event"])
   private handlePointerUp(event: PointerEvent): void {
     this.nativeElement.releasePointerCapture(event.pointerId);
   }
