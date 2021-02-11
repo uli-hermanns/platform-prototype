@@ -168,9 +168,9 @@ export class FormAutosaveDirective<TModel>
   }
 
   /**
-   * Handles a mouse down event.
+   * Handles a pointer up or cancel event.
    *
-   * @param event The mouse event.
+   * @param event The pointer event.
    */
   @HostListener("document:pointerup", ["$event"])
   @HostListener("document:pointercancel", ["$event"])
@@ -179,9 +179,9 @@ export class FormAutosaveDirective<TModel>
   }
 
   /**
-   * Handles a mouse down event.
+   * Handles a pointer down event.
    *
-   * @param event The mouse event.
+   * @param event The  event.
    */
   @HostListener("document:pointerdown", ["$event"])
   private handlePointerDown(event: PointerEvent): void {
