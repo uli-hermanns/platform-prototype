@@ -61,8 +61,7 @@ export class FormAutosaveDirective<TModel>
     private focusTrapFactory: ConfigurableFocusTrapFactory,
     private formGroupDirective: FormGroupDirective,
     private ngZone: NgZone,
-    private el: ElementRef<HTMLFormElement>,
-    private subtree: ElementRef<HTMLElement>
+    private el: ElementRef<HTMLFormElement>
   ) {
     this.logger = console;
     this.logger.info(`${FormAutosaveDirective.name} created.`);
@@ -85,7 +84,6 @@ export class FormAutosaveDirective<TModel>
   ngOnDestroy() {
     this.focusTrap.destroy();
     this.focusMonitor.stopMonitoring(this.el);
-    this.focusMonitor.stopMonitoring(this.subtree);
   }
 
   /**
@@ -167,6 +165,16 @@ export class FormAutosaveDirective<TModel>
       this.nativeElement.contains(node) ||
       this.overlayContainer.getContainerElement().contains(node)
     );
+  }
+
+  /**
+   * Handles a mouse down event.
+   *
+   * @param event The mouse event.
+   */
+  @HostListener("document:pointerup", ["$event"])
+  private handlePointerUp(event: PointerEvent): void {
+    this.nativeElement.releasePointerCapture(event.pointerId);
   }
 
   /**
