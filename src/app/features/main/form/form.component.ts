@@ -59,7 +59,7 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   constructor(private fb: FormAutosaveBuilder, private cd: ChangeDetectorRef, private adapter: DateAdapter<Date>) {
     this.customerForm = this.fb.group(this.form);
-    // adapter.setLocale("de-DE");
+    adapter.setLocale("de-DE");
   }
   
 
